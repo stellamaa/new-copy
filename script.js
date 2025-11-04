@@ -6,15 +6,15 @@ let windowHalfY = window.innerHeight / 2;
 
 // Media files to display (all available files)
 const mediaFiles = [
-    { src: 'images/fionavideo.mov', type: 'video', url: 'https://fionaalbrow.com' },
-    { src: 'images/image1.png', type: 'image' },
-    { src: 'images/rielavideo.mov', type: 'video', url: 'https://rielaspaces.com' },
-    { src: 'images/img3.png', type: 'image' },
-    { src: 'images/stellavideo.mov', type: 'video', url: 'https://stellamathioudakis.com' },
-    { src: 'images/image15.png', type: 'image' },
-    { src: 'images/image16.png', type: 'image' }, 
-    { src: 'images/img20.png', type: 'image' },
-    { src: 'images/img8.png', type: 'image' }
+    { src: 'assets/fionavideo.mov', type: 'video', url: 'https://fionaalbrow.com' },
+    { src: 'assets/image1.png', type: 'image' },
+    { src: 'assets/rielavideo.mov', type: 'video', url: 'https://rielaspaces.com' },
+    { src: 'assets/img3.png', type: 'image' },
+    { src: 'assets/stellavideo.mov', type: 'video', url: 'https://stellamathioudakis.com' },
+    { src: 'assets/image15.png', type: 'image' },
+    { src: 'assets/image16.png', type: 'image' }, 
+    { src: 'assets/img20.png', type: 'image' },
+    { src: 'assets/img8.png', type: 'image' }
 ];
 
 // Initialize Three.js scene
@@ -44,7 +44,9 @@ function init() {
     
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xf5f5f5, 1);
+    // Set initial clear color based on theme
+    const isDark = document.documentElement.classList.contains('dark');
+    renderer.setClearColor(isDark ? 0x414141 : 0xffffff, 1);
     container.appendChild(renderer.domElement);
     console.log('Renderer created and added to container');
     
@@ -84,22 +86,22 @@ function init() {
 }
 
 function createMediaPlanes() {
-    // Position planes in 3D space to accommodate 14 files
+    // Position planes in 3D space to accommodate 14 files - closer together
     const positions = [
-        { x: -0.3, y: 1.1, z: 0 },
-        { x: -0.5, y: 0.2, z: 0 },
-        { x: -0.8, y: -0.5, z: 0 },
-        { x: 1, y: -0.5, z: 0 },
-        { x: 0.2, y: 1, z: 0 },
-        { x: 0, y: -1, z: 0 },
-        { x: 0, y: 0.2, z: 0 },
-        { x: 0.4, y: 0.5, z: 0 },
-        { x: 1.1, y: -0.1, z: 0 },
-        { x: -0.5, y: -0.1, z: 0 },
-        { x: -0.2, y: 0, z: 0 },
-        { x: 0.5, y: 0.2, z: 0 },
-        { x: -0.5, y: 0.5, z: 0 },
-        { x: 0.5, y: 0, z: 0 }
+        { x: -0.24, y: 0.88, z: 0 },      // 20% closer
+        { x: -0.4, y: 0.16, z: 0 },
+        { x: -0.64, y: -0.4, z: 0 },
+        { x: 0.8, y: -0.4, z: 0 },
+        { x: 0.16, y: 0.8, z: 0 },
+        { x: 0, y: -0.8, z: 0 },
+        { x: 0, y: 0.16, z: 0 },
+        { x: 0.32, y: 0.4, z: 0 },
+        { x: 0.88, y: -0.08, z: 0 },
+        { x: -0.4, y: -0.08, z: 0 },
+        { x: -0.16, y: 0, z: 0 },
+        { x: 0.4, y: 0.16, z: 0 },
+        { x: -0.4, y: 0.4, z: 0 },
+        { x: 0.4, y: 0, z: 0 }
     ];
     
     // Subtle tilted rotations for unified group effect
@@ -160,7 +162,7 @@ function createMediaPlanes() {
     
     mediaFiles.forEach((media, index) => {
         console.log(`Creating plane ${index}:`, media);
-        const geometry = new THREE.PlaneGeometry(0.8, 0.6);
+        const geometry = new THREE.PlaneGeometry(3, 2); // 10% bigger
         let material;
         
         if (media.type === 'video') {
@@ -250,7 +252,7 @@ function animate() {
     
     // Rotate all planes together as one unit, slowly
     const time = Date.now() * 0.001;
-    const groupRotationY = time * 0.02; // Slow group rotation
+    const groupRotationY = time * 0.0204; // 2% faster rotation
     const groupRotationX = Math.sin(time * 0.3) * 0.1; // Gentle group tilt
     const groupRotationZ = Math.cos(time * 0.2) * 0; // Gentle group wobble
     
@@ -369,17 +371,30 @@ function onMouseClick(event) {
 function showFullscreenImage(imageSrc) {
     const modal = document.getElementById('fullscreen-modal');
     const fullscreenImage = document.getElementById('fullscreen-image');
+    const closeDevelopment = document.getElementById('close-development');
     
     if (modal && fullscreenImage) {
         fullscreenImage.src = imageSrc;
         modal.classList.add('active');
+        
+        // Hide the close development button when modal opens
+        if (closeDevelopment) {
+            closeDevelopment.style.display = 'none';
+        }
     }
 }
 
 function closeFullscreenModal() {
     const modal = document.getElementById('fullscreen-modal');
+    const closeDevelopment = document.getElementById('close-development');
+    
     if (modal) {
         modal.classList.remove('active');
+    }
+    
+    // Show the close development button when modal closes
+    if (closeDevelopment) {
+        closeDevelopment.style.display = '';
     }
 }
 
@@ -492,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Navigation functionality
 let isAboutOpen = false;
-let currentPage = 'landing';
+// UNUSED: let currentPage = 'landing'; // Variable is set but never actually used
 
 // Upside-down character mapping
 const upsideDownChars = {
@@ -579,11 +594,13 @@ function goToDevelopment() {
     }
 }
 
+// UNUSED FUNCTION - Never called
 function goToMusic() {
     // Placeholder for music page
     console.log('Music page - coming soon');
     }
     
+// UNUSED FUNCTION - Never called
 function goToInstallations() {
     // Placeholder for installations page
     console.log('Installations page - coming soon');
@@ -807,6 +824,13 @@ function initializeMusicPlayer() {
     setup2(amazonBtn, amazonAudio);
 }
 
+// Update Three.js renderer clear color based on theme
+function updateThreeJSBackground(isDark) {
+    if (renderer) {
+        renderer.setClearColor(isDark ? 0x414141 : 0xffffff, 1);
+    }
+}
+
 // Theme toggle
 function initializeThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
@@ -816,9 +840,11 @@ function initializeThemeToggle() {
     if (saved === 'dark') {
         root.classList.add('dark');
         if (toggleBtn) toggleBtn.textContent = 'light';
+        updateThreeJSBackground(true);
     } else {
         root.classList.remove('dark');
         if (toggleBtn) toggleBtn.textContent = 'dark';
+        updateThreeJSBackground(false);
     }
     // Click handler
     if (toggleBtn) {
@@ -826,6 +852,7 @@ function initializeThemeToggle() {
             const isDark = root.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             toggleBtn.textContent = isDark ? 'light' : 'dark';
+            updateThreeJSBackground(isDark);
         });
     }
 }
