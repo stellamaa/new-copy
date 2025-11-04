@@ -468,26 +468,35 @@ body {
     right: 50px;
     transform: translateY(-50%);
     display: none;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
+    width: 20vw;
+    height: 100vh;
+    gap: 10px;
     z-index: 1500;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.media-preview img {
+   
+    height: 100%;
+    object-fit: contain;
 }
 
 .media-preview2 {
     position: fixed;
-    top: 70%;
-    right: 50px;
-    transform: translateY(-50%);
+    top: 55%;
+    right: 0%;
+    transform: translateY(0%);
     display: none;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px; 
+    flex-direction: column;
+    width: 40vw;
     z-index: 1500;
     opacity: 0;
+    padding-right: 10px;
     transition: opacity 0.5s ease-in-out;
+    box-sizing: border-box;
 }
 
 .media-preview.active {
@@ -519,7 +528,7 @@ body {
     .preview-video,
     .preview-image,
     .preview-video2 {
-        width: 45vw;
+        width: 100%;
         height: auto;
     }
 }
@@ -527,8 +536,31 @@ body {
 .preview-video,
 .preview-image,
 .preview-video2 {
-    width: 300px;
-    height: 250px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Single item (FLAW, Gender) - takes full container width */
+#flaw-media-preview .preview-image,
+#gender-media-preview .preview-video2 {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Multiple items (Restriction) - stack in column */
+#media-preview {
+    flex-direction: column;
+}
+
+#media-preview .preview-video,
+#media-preview .preview-image {
+    width: 100%;
+    height: auto;
+    max-height: calc((80vh - 60px) / 3); /* Divide available space by 3 items, accounting for gaps */
     object-fit: cover;
 }
 
@@ -764,20 +796,6 @@ body {
                       linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
     background-size: 20px 20px;
     background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-.media-preview {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    z-index: 1500;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.media-preview.active {
-    display: flex;
-    opacity: 1;
 }
 /* Animations */
 @keyframes slideUp {
