@@ -5,12 +5,26 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.4;
     color: #414141;
     background-color: #fff;
     overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.dark html,
+.dark body {
+    background-color: #4a4a4a !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* Navigation */
@@ -22,6 +36,8 @@ body {
     display: flex;
     gap: 20px;
 }
+
+/* Nav visibility handled by JavaScript - hide nav when pages are active */
 
 .noise-overlay {
     position: fixed;
@@ -733,26 +749,30 @@ body {
 }
 
 /* Dark mode root styles */
-.dark {
-    background: #414141dd; /* sound circle style */
+.dark,
+.dark html,
+.dark body {
+    background: #4a4a4a !important; /* Slightly lighter grey - consistent across all pages */
     color: #fff;
+    width: 100% !important;
+    height: 100% !important;
 }
 
-
-
-/* Dark mode section overrides */
-.dark .landing-page { background-color: #414141; }
-.dark .development-page { background-color: #414141; }
-.dark .about-page { background-color: #414141; }
+/* Dark mode section overrides - all use same background color */
+.dark .landing-page { background-color: #4a4a4a; }
+.dark .development-page { background-color: #4a4a4a; }
+.dark .about-page { background-color: #4a4a4a; }
 .dark .about-page p, .dark .about-page li, .dark .about-page h3{ color: #ffffff; }
 .dark .close-about { color: #ffffff;}
 .dark .close-about:hover { opacity: 0.7; }
-.dark .art-page { background-color: #414141; }
+.dark .art-page { background-color: #4a4a4a; }
 .dark .art-page p, .dark .art-page li, .dark .art-page h3, .dark .list-table td{ color: #ffffff; }
 .dark .close-art { color: #ffffff;}
 .dark .close-art:hover { opacity: 0.7; }
 .dark .nav-name, .dark .nav-item, .dark .nav-about { color: #ffffffd0; }
 .dark .email-link { color: #ffffff; }
+.dark #three-container { background-color: #4a4a4a; }
+.dark .fullscreen-modal { background-color: #4a4a4a; }
 
 
 .email-link {

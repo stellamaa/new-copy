@@ -46,7 +46,7 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     // Set initial clear color based on theme
     const isDark = document.documentElement.classList.contains('dark');
-    renderer.setClearColor(isDark ? 0x414141 : 0xffffff, 1);
+    renderer.setClearColor(isDark ? 0x4a4a4a : 0xffffff, 1); // Use lighter grey for consistency
     container.appendChild(renderer.domElement);
     console.log('Renderer created and added to container');
     
@@ -525,8 +525,12 @@ document.addEventListener('DOMContentLoaded', function() {
         closeArt.addEventListener('click', function(e) {
             e.preventDefault();
             const artPage = document.getElementById('art-page');
-            if (artPage) artPage.classList.remove('active');
+            const nav = document.querySelector('.nav');
+            if (artPage) {
+                artPage.classList.remove('active');
+            }
             isArtOpen = false;
+            if (nav) nav.style.display = 'flex'; // Show nav
         });
     }
     
@@ -542,7 +546,11 @@ document.addEventListener('DOMContentLoaded', function() {
         closeDevelopment.addEventListener('click', function(e) {
             e.preventDefault();
             const developmentPage = document.getElementById('development-page');
-            if (developmentPage) developmentPage.classList.remove('active');
+            const nav = document.querySelector('.nav');
+            if (developmentPage) {
+                developmentPage.classList.remove('active');
+            }
+            if (nav) nav.style.display = 'flex'; // Show nav
             currentPage = 'landing';
         });
     }
@@ -609,14 +617,19 @@ function goToLanding() {
     const landingPage = document.getElementById('landing-page');
     const developmentPage = document.getElementById('development-page');
     const aboutPage = document.getElementById('about-page');
+    const artPage = document.getElementById('art-page');
+    const nav = document.querySelector('.nav');
     
     // Hide all pages
     developmentPage.classList.remove('active');
     aboutPage.classList.remove('active');
+    if (artPage) artPage.classList.remove('active');
     isAboutOpen = false;
+    isArtOpen = false;
     
     // Show landing page
     landingPage.style.display = 'flex';
+    if (nav) nav.style.display = 'flex'; // Show nav
     currentPage = 'landing';
 }
 
@@ -652,32 +665,40 @@ function goToInstallations() {
 let isArtOpen = false;
 function toggleArt() {
     const artPage = document.getElementById('art-page');
+    const nav = document.querySelector('.nav');
     if (!artPage) return;
     if (isArtOpen) {
         artPage.classList.remove('active');
         isArtOpen = false;
+        if (nav) nav.style.display = 'flex'; // Show nav
     } else {
         artPage.classList.add('active');
         isArtOpen = true;
+        if (nav) nav.style.display = 'none'; // Hide nav
     }
 }
 
 function toggleAbout() {
     const aboutPage = document.getElementById('about-page');
+    const nav = document.querySelector('.nav');
     
     if (isAboutOpen) {
         aboutPage.classList.remove('active');
         isAboutOpen = false;
+        if (nav) nav.style.display = 'flex'; // Show nav
     } else {
-            aboutPage.classList.add('active');
+        aboutPage.classList.add('active');
         isAboutOpen = true;
+        if (nav) nav.style.display = 'none'; // Hide nav
     }
 }
 
 function closeAboutPage() {
     const aboutPage = document.getElementById('about-page');
+    const nav = document.querySelector('.nav');
     aboutPage.classList.remove('active');
     isAboutOpen = false;
+    if (nav) nav.style.display = 'flex'; // Show nav
 }
 
 // Media preview functionality
@@ -870,7 +891,7 @@ function initializeMusicPlayer() {
 // Update Three.js renderer clear color based on theme
 function updateThreeJSBackground(isDark) {
     if (renderer) {
-        renderer.setClearColor(isDark ? 0x414141 : 0xffffff, 1);
+        renderer.setClearColor(isDark ? 0x4a4a4a : 0xffffff, 1); // Use lighter grey for consistency
     }
 }
 
