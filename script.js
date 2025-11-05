@@ -51,7 +51,7 @@ function init() {
     console.log('Renderer created and added to container');
     
     // Add basic lighting first
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
     
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -398,6 +398,46 @@ function closeFullscreenModal() {
     }
 }
 
+// Initialize development text warping
+function initializeDevelopmentTextWarp() {
+    const developmentText = document.querySelector('.development-text p');
+    if (!developmentText) return;
+    
+    const text = developmentText.textContent;
+    developmentText.textContent = '';
+    
+    // Split text into characters and create spans
+    const chars = text.split('').map(char => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = char === ' ' ? '\u00A0' : char; // Non-breaking space
+        return span;
+    });
+    
+    developmentText.append(...chars);
+    
+    // Warp on hover
+    developmentText.addEventListener('mouseenter', function() {
+        chars.forEach((char, index) => {
+            if (char.textContent === '\u00A0') return; // Skip spaces
+            
+            // Random distortion values
+            const translateX = (Math.random() - 0.9) * 10;
+            const translateY = (Math.random() - 0.2) * 10;
+            const rotate = (Math.random() - 0.2) * 45;
+            
+            char.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`;
+        });
+    });
+    
+    // Return to original position on mouse leave
+    developmentText.addEventListener('mouseleave', function() {
+        chars.forEach((char) => {
+            char.style.transform = 'translate(0px, 0px) rotate(0deg)';
+        });
+    });
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing...');
@@ -407,6 +447,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize theme from storage and wire toggle
     initializeThemeToggle();
+    
+    // Initialize development text warping
+    initializeDevelopmentTextWarp();
     
     // Add event listeners after DOM is ready
     document.addEventListener('click', onMouseClick);
