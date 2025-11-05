@@ -703,6 +703,8 @@ function closeAboutPage() {
 
 // Media preview functionality
 function initializeMediaPreview() {
+    const isMobile = window.innerWidth <= 768;
+    
     // Restriction media preview
     const restrictionRow = document.querySelector('.restriction-row');
     const mediaPreview = document.getElementById('media-preview');
@@ -740,17 +742,36 @@ function initializeMediaPreview() {
         };
 
         // Desktop hover
-        restrictionRow.addEventListener('mouseenter', showRestriction);
-        restrictionRow.addEventListener('mouseleave', hideRestriction);
+        if (!isMobile) {
+            restrictionRow.addEventListener('mouseenter', showRestriction);
+            restrictionRow.addEventListener('mouseleave', hideRestriction);
+        }
+        
         // Mobile tap toggle
         restrictionRow.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (mediaPreview.classList.contains('active')) {
-                hideRestriction();
-            } else {
-                showRestriction();
+            if (isMobile) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (mediaPreview.classList.contains('active')) {
+                    hideRestriction();
+                } else {
+                    // Hide other previews
+                    const genderPreview = document.getElementById('gender-media-preview');
+                    if (genderPreview) genderPreview.classList.remove('active');
+                    if (flawPreview) flawPreview.classList.remove('active');
+                    showRestriction();
+                }
             }
         });
+        
+        // Close on click outside (mobile)
+        if (isMobile) {
+            document.addEventListener('click', (e) => {
+                if (!restrictionRow.contains(e.target) && !mediaPreview.contains(e.target)) {
+                    hideRestriction();
+                }
+            });
+        }
     }
     
     // Gender media preview
@@ -780,17 +801,35 @@ function initializeMediaPreview() {
         };
 
         // Desktop hover
-        genderRow.addEventListener('mouseenter', showGender);
-        genderRow.addEventListener('mouseleave', hideGender);
+        if (!isMobile) {
+            genderRow.addEventListener('mouseenter', showGender);
+            genderRow.addEventListener('mouseleave', hideGender);
+        }
+        
         // Mobile tap toggle
         genderRow.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (genderPreview.classList.contains('active')) {
-                hideGender();
-            } else {
-                showGender();
+            if (isMobile) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (genderPreview.classList.contains('active')) {
+                    hideGender();
+                } else {
+                    // Hide other previews
+                    if (mediaPreview) mediaPreview.classList.remove('active');
+                    if (flawPreview) flawPreview.classList.remove('active');
+                    showGender();
+                }
             }
         });
+        
+        // Close on click outside (mobile)
+        if (isMobile) {
+            document.addEventListener('click', (e) => {
+                if (!genderRow.contains(e.target) && !genderPreview.contains(e.target)) {
+                    hideGender();
+                }
+            });
+        }
     }
 
     // FLAW media preview
@@ -806,12 +845,35 @@ function initializeMediaPreview() {
             flawPreview.classList.remove('active');
         };
 
-        flawRow.addEventListener('mouseenter', showFlaw);
-        flawRow.addEventListener('mouseleave', hideFlaw);
+        if (!isMobile) {
+            flawRow.addEventListener('mouseenter', showFlaw);
+            flawRow.addEventListener('mouseleave', hideFlaw);
+        }
+        
         flawRow.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (flawPreview.classList.contains('active')) hideFlaw(); else showFlaw();
+            if (isMobile) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (flawPreview.classList.contains('active')) {
+                    hideFlaw();
+                } else {
+                    // Hide other previews
+                    if (mediaPreview) mediaPreview.classList.remove('active');
+                    const genderPreview = document.getElementById('gender-media-preview');
+                    if (genderPreview) genderPreview.classList.remove('active');
+                    showFlaw();
+                }
+            }
         });
+        
+        // Close on click outside (mobile)
+        if (isMobile) {
+            document.addEventListener('click', (e) => {
+                if (!flawRow.contains(e.target) && !flawPreview.contains(e.target)) {
+                    hideFlaw();
+                }
+            });
+        }
     }
 }
 

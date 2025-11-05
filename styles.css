@@ -499,14 +499,15 @@ body {
     top: 70%;
     right: 50px;
     transform: translateY(-50%);
-    display: none;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in, visibility 1s ease-in;
     flex-direction: column;
     width: 20vw;
     height: 100vh;
     gap: 10px;
     z-index: 1500;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
     padding: 0px;
     box-sizing: border-box;
 }
@@ -521,25 +522,27 @@ body {
     top: 55%;
     right: 0%;
     transform: translateY(0%);
-    display: none;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in, visibility 1s ease-in;
     flex-direction: column;
     width: 40vw;
     z-index: 1500;
-    opacity: 0;
     padding-right: 10px;
-    transition: opacity 0.5s ease-in-out;
     box-sizing: border-box;
 }
 
 .media-preview.active {
-    display: flex;
     opacity: 1;
+    visibility: visible;
 }
 
 .media-preview2.active {
-    display: flex;
     opacity: 1;
+    visibility: visible;
 }
+
 .gender-row video {
     height: 700px;
     width: 700px;
@@ -548,45 +551,60 @@ body {
 @media (max-width: 768px) {
     .media-preview,
     .media-preview2 {
-        position: fixed !important;
-        top: 80% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
         right: auto !important;
-        width: 90vw !important;
-        max-width: 400px !important;
-        padding: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px 0 !important;
+        padding: 10px 0 !important;
         justify-content: center;
-        z-index: 3000 !important;
+        z-index: 1 !important;
+        background-color: transparent !important;
+        display: none !important;
+    }
+    
+    .media-preview.active,
+    .media-preview2.active {
+        display: flex !important;
     }
 
     .preview-video,
     .preview-image,
     .preview-video2 {
         width: 100% !important;
-        height: 90vh !important;
-        max-height: 70vh !important;
+        height: auto !important;
+        max-height: 30vh !important;
         object-fit: contain !important;
     }
     
-    /* FLAW image - make it clearly visible on mobile */
-    #flaw-media-preview .preview-image {
-        width: 100% !important;
-        max-width: 100% !important;
-        max-height: 50vh !important;
-        object-fit: contain !important;
+    /* Gender video - make 20% bigger on mobile */
+    #gender-media-preview .preview-video2 {
+        max-height: 48vh !important; /* 40vh * 1.2 = 48vh */
     }
     
-    /* Restriction media preview - stack vertically and make visible */
+    /* Hide FLAW image on mobile */
+    #flaw-media-preview {
+        display: none !important;
+    }
+    
+    #flaw-media-preview.active {
+        display: none !important;
+    }
+    
+    /* Restriction media preview - stack vertically and make all fit in view */
     #media-preview {
         flex-direction: column !important;
-        gap: 15px !important;
+        gap: 8px !important;
+        max-height: 90vh !important;
     }
     
     #media-preview .preview-video,
     #media-preview .preview-image {
         width: 100% !important;
-        max-height: calc((70vh - 30px) / 3) !important;
+        max-height: 22.4vh !important; /* 28vh * 0.8 = 22.4vh (20% smaller) */
         object-fit: contain !important;
     }
 }
@@ -598,6 +616,14 @@ body {
     height: auto;
     object-fit: contain;
     display: block;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.media-preview.active .preview-video,
+.media-preview.active .preview-image,
+.media-preview2.active .preview-video2 {
+    opacity: 1;
 }
 
 /* Single item (FLAW, Gender) - takes full container width */
@@ -788,6 +814,16 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .development-text {
+        position: absolute;
+        bottom: 5% !important;
+        left: 50% !important;
+        top: auto !important;
+        transform: translateX(-50%) !important;
+        width: 90% !important;
+        text-align: center;
+    }
+    
     .content {
         flex-direction: column;
         padding: 60px 20px 20px;
@@ -820,6 +856,8 @@ body {
     .gallery-item {
         flex: 0 0 33.333%; /* 3 images per row on tablet */
         height: 150px;
+        text-orientation: sideways;
+
     }
 }
 
@@ -832,6 +870,18 @@ body {
 
     .art-page {
         padding: 10px 10px 10px 10px !important;
+        overflow: hidden !important;
+    }
+    
+    /* Lower Music Sync text and make it same size as music text */
+    .services-section:first-child .services-list li:last-child {
+        margin-top: 15px;
+        font-size: 0.5rem !important;
+    }
+    
+    /* Ensure all music list items are same size on mobile */
+    .services-section:first-child .services-list li {
+        font-size: 0.5rem !important;
     }
 
 /* Mobile: Close buttons at bottom left */
