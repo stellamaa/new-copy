@@ -830,6 +830,7 @@ body {
 
 .email-link {
     font-size: 2rem;
+    text-decoration: none !important;
     font-weight: lighter;
     font-family: 'Helvetica Neue', sans-serif;
     color: #414141;
@@ -868,7 +869,7 @@ body {
 .dark .close-art { color: #ffffff;}
 .dark .close-art:hover { opacity: 0.7; }
 .dark .nav-name, .dark .nav-item, .dark .nav-about { color: #ffffffd0; }
-.dark .email-link { color: #ffffff; }
+.dark .email-link { color: #ffffff; text-decoration: none !important; }
 .dark #three-container { background-color: #4a4a4a; }
 .dark .fullscreen-modal { background-color: #4a4a4a; }
 
