@@ -942,6 +942,10 @@ body {
 
 @media (max-width: 480px) {
 
+    .email-link {
+        text-decoration: none !important;
+    }
+
     .about-page  {
         padding: 10px 10px 10px 10px !important;
        
