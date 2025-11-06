@@ -162,7 +162,7 @@ function createMediaPlanes() {
     
     mediaFiles.forEach((media, index) => {
         console.log(`Creating plane ${index}:`, media);
-        const geometry = new THREE.PlaneGeometry(3, 2); // 10% bigger
+        const geometry = new THREE.PlaneGeometry(2.5, 1.7); // 10% bigger
         let material;
         
         if (media.type === 'video') {
@@ -451,6 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize development text warping
     initializeDevelopmentTextWarp();
     
+    // Initialize random images on landing page
+    initializeRandomImages();
+    
     // Add event listeners after DOM is ready
     document.addEventListener('click', onMouseClick);
     
@@ -483,8 +486,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const navName = document.getElementById('nav-name');
     if (navName) {
         navName.addEventListener('click', function(e) {
-                e.preventDefault();
-                goToLanding();
+            e.preventDefault();
+            goToLanding();
             });
     }
     
@@ -525,12 +528,11 @@ document.addEventListener('DOMContentLoaded', function() {
         closeArt.addEventListener('click', function(e) {
             e.preventDefault();
             const artPage = document.getElementById('art-page');
-            const nav = document.querySelector('.nav');
             if (artPage) {
                 artPage.classList.remove('active');
             }
             isArtOpen = false;
-            if (nav) nav.style.display = 'flex'; // Show nav
+            goToLanding(); // Return to landing page with random images
         });
     }
     
@@ -546,12 +548,10 @@ document.addEventListener('DOMContentLoaded', function() {
         closeDevelopment.addEventListener('click', function(e) {
             e.preventDefault();
             const developmentPage = document.getElementById('development-page');
-            const nav = document.querySelector('.nav');
             if (developmentPage) {
                 developmentPage.classList.remove('active');
             }
-            if (nav) nav.style.display = 'flex'; // Show nav
-            currentPage = 'landing';
+            goToLanding(); // Return to landing page with random images
         });
     }
 });
@@ -612,11 +612,11 @@ function initializeNavigation() {
             }
         });
     }
-    
+
 function goToLanding() {
     const landingPage = document.getElementById('landing-page');
     const developmentPage = document.getElementById('development-page');
-    const aboutPage = document.getElementById('about-page');
+        const aboutPage = document.getElementById('about-page');
     const artPage = document.getElementById('art-page');
     const nav = document.querySelector('.nav');
     
@@ -631,6 +631,11 @@ function goToLanding() {
     landingPage.style.display = 'flex';
     if (nav) nav.style.display = 'flex'; // Show nav
     currentPage = 'landing';
+    
+    // Reload random images when returning to landing page
+    if (typeof window.reloadRandomImages === 'function') {
+        window.reloadRandomImages();
+    }
 }
 
 function goToDevelopment() {
@@ -670,7 +675,7 @@ function toggleArt() {
     if (isArtOpen) {
         artPage.classList.remove('active');
         isArtOpen = false;
-        if (nav) nav.style.display = 'flex'; // Show nav
+        goToLanding(); // Return to landing page with random images
     } else {
         artPage.classList.add('active');
         isArtOpen = true;
@@ -685,9 +690,9 @@ function toggleAbout() {
     if (isAboutOpen) {
         aboutPage.classList.remove('active');
         isAboutOpen = false;
-        if (nav) nav.style.display = 'flex'; // Show nav
+        goToLanding(); // Return to landing page with random images
     } else {
-        aboutPage.classList.add('active');
+            aboutPage.classList.add('active');
         isAboutOpen = true;
         if (nav) nav.style.display = 'none'; // Hide nav
     }
@@ -698,7 +703,7 @@ function closeAboutPage() {
     const nav = document.querySelector('.nav');
     aboutPage.classList.remove('active');
     isAboutOpen = false;
-    if (nav) nav.style.display = 'flex'; // Show nav
+    goToLanding(); // Return to landing page with random images
 }
 
 // Media preview functionality
@@ -981,4 +986,106 @@ function initializeThemeToggle() {
             updateThreeJSBackground(isDark);
         });
     }
+}
+
+// Random images functionality for landing page
+function initializeRandomImages() {
+    const imageArray = [
+        'assets/randomimage/atlas.jpg',
+        'assets/randomimage/Cave.jpg',
+        'assets/randomimage/door.jpg',
+        'assets/randomimage/horse.jpg',
+        'assets/randomimage/PEDELI.jpg',
+        'assets/randomimage/pub.jpg',
+        'assets/randomimage/tree.jpg'
+    ];
+    
+    const leftContainer = document.getElementById('random-image-left');
+    const rightContainer = document.getElementById('random-image-right');
+    
+    if (!leftContainer || !rightContainer) return;
+    
+    let leftExpanded = false;
+    let rightExpanded = false;
+    let currentLeftImage = null;
+    let currentRightImage = null;
+    
+    function getRandomImages() {
+        const shuffled = [...imageArray].sort(() => 0.5 - Math.random());
+        return [shuffled[0], shuffled[1]];
+    }
+    
+    function loadImages() {
+        const [leftImagePath, rightImagePath] = getRandomImages();
+        
+        // Clear existing images
+        leftContainer.innerHTML = '';
+        rightContainer.innerHTML = '';
+        
+        // Create and add left image
+        const leftImg = document.createElement('img');
+        leftImg.src = leftImagePath;
+        leftImg.alt = 'Random image';
+        leftContainer.appendChild(leftImg);
+        currentLeftImage = leftImagePath;
+        
+        // Create and add right image
+        const rightImg = document.createElement('img');
+        rightImg.src = rightImagePath;
+        rightImg.alt = 'Random image';
+        rightContainer.appendChild(rightImg);
+        currentRightImage = rightImagePath;
+        
+        // Reset expanded states
+        leftExpanded = false;
+        rightExpanded = false;
+        leftContainer.classList.remove('expanded');
+        rightContainer.classList.remove('expanded');
+    }
+    
+    // Handle left image click
+    leftContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isMobile = window.innerWidth <= 768;
+        
+        if (leftExpanded) {
+            // Collapse left
+            leftExpanded = false;
+            leftContainer.classList.remove('expanded');
+        } else {
+            // Expand left, collapse right if expanded
+            leftExpanded = true;
+            leftContainer.classList.add('expanded');
+            if (rightExpanded) {
+                rightExpanded = false;
+                rightContainer.classList.remove('expanded');
+            }
+        }
+    });
+    
+    // Handle right image click
+    rightContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isMobile = window.innerWidth <= 768;
+        
+        if (rightExpanded) {
+            // Collapse right
+            rightExpanded = false;
+            rightContainer.classList.remove('expanded');
+        } else {
+            // Expand right, collapse left if expanded
+            rightExpanded = true;
+            rightContainer.classList.add('expanded');
+            if (leftExpanded) {
+                leftExpanded = false;
+                leftContainer.classList.remove('expanded');
+            }
+        }
+    });
+    
+    // Load initial images
+    loadImages();
+    
+    // Expose loadImages function for external use (e.g., when page rerenders)
+    window.reloadRandomImages = loadImages;
 }
