@@ -39,3 +39,6 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+
+# Large media files (use Git LFS or external storage)
+public/assets/stellaoldsite.mov
