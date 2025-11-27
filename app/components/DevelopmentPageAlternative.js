@@ -1,0 +1,162 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { mediaFiles } from '../constants/mediaFiles';
+import { useThreeJSAlternative } from '../hooks/useThreeJSAlternative';
+import { useDevelopmentText } from '../hooks/useDevelopmentText';
+import FullscreenModal from './FullscreenModal';
+
+export default function DevelopmentPageAlternative() {
+  const [isGridMode, setIsGridMode] = useState(true); // Grid is default
+  const threeContainerRef = useRef(null);
+  const [displayedText, setDisplayedText] = useState('');
+
+  const handleMediaClick = (media) => {
+    if (media.type === 'video' && media.url) {
+      window.open(media.url, '_blank', 'noopener,noreferrer');
+    } else if (media.type === 'image') {
+      if (window.showFullscreenImage) {
+        window.showFullscreenImage(media.src);
+      }
+    }
+  };
+
+  // Pass isGridMode to the hook - it will initialize when grid mode is false
+  useThreeJSAlternative(threeContainerRef, handleMediaClick, isGridMode);
+  useDevelopmentText();
+
+  const toggleGridMode = () => {
+    setIsGridMode(!isGridMode);
+  };
+
+  // Ensure videos play when grid mode is active
+  useEffect(() => {
+    if (isGridMode) {
+      const videos = document.querySelectorAll('.grid-item-video');
+      videos.forEach((video) => {
+        if (video instanceof HTMLVideoElement) {
+          video.play().catch(() => {
+            // Ignore autoplay errors (browser may block autoplay)
+          });
+        }
+      });
+    }
+  }, [isGridMode]);
+
+  // Typing animation for "recent projects" text
+  useEffect(() => {
+    if (isGridMode) {
+      setDisplayedText('');
+      let currentIndex = 0;
+      const text = 'recent projects';
+      const typingInterval = setInterval(() => {
+        if (currentIndex < text.length) {
+          setDisplayedText(text.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 50); // 50ms per letter
+
+      return () => clearInterval(typingInterval);
+    }
+  }, [isGridMode]);
+
+  return (
+    <div className="page development-page" id="development-page">
+      <button className="close-development" id="close-development">
+        ×
+      </button>
+      <button className="grid-toggle" id="grid-toggle" onClick={toggleGridMode}>
+        {isGridMode ? '3D' : 'grid'}
+      </button>
+      <div id="three-container" ref={threeContainerRef} style={{ display: isGridMode ? 'none' : 'block' }}></div>
+      <div className="development-text">
+        <p>
+          A few projects made with React, Typescript, Javascript, generative art sketches made with p5.js. If you would
+          like to see my UX case studies send me an email.{' '}
+        </p>
+      </div>
+      <div className="recent-projects-title">{(typeof window !== 'undefined' && window.innerWidth <= 768) ? displayedText : 'recent projects'}</div>
+      <div className="development-grid" id="development-grid" style={{ display: isGridMode ? 'grid' : 'none' }}>
+        {mediaFiles.map((media) => {
+          // Extract title from filename or use URL domain for videos
+          const getTitle = () => {
+            if (media.title) {
+                return media.title;
+              }
+            if (media.type === 'video' && media.url) {
+              try {
+                const url = new URL(media.url);
+                const domain = url.hostname.replace('www.', '').split('.')[0];
+                // Capitalize first letter only
+                return domain.charAt(0).toUpperCase() + domain.slice(1);
+              } catch {
+                return 'Video';
+              }
+            }
+            // Extract name from image path (e.g., '/assets/image1.png' -> 'image1')
+            const filename = media.src.split('/').pop().replace(/\.[^/.]+$/, '');
+            return filename.replace(/[^a-zA-Z0-9]/g, '') || 'Image';
+          };
+
+          const title = getTitle();
+
+          if (media.type === 'image') {
+            return (
+              <div
+                key={media.src}
+                className="development-grid-item development-grid-item-image"
+                data-image-src={media.src}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  if (window.showFullscreenImage) {
+                    window.showFullscreenImage(media.src);
+                  }
+                }}
+              >
+                <div className="grid-item-title">{title}</div>
+                <img src={media.src} alt={title} className="grid-item-image" />
+              </div>
+            );
+          }
+
+          return (
+            <div
+              key={media.src}
+              className="development-grid-item development-grid-item-video"
+              data-video-url={media.url || ''}
+              role="button"
+              tabIndex={0}
+              onClick={() => {
+                if (media.url) {
+                  window.open(media.url, '_blank', 'noopener,noreferrer');
+                }
+              }}
+            >
+              <div className="grid-item-title">{title}</div>
+              <video 
+                src={media.src} 
+                muted 
+                loop 
+                playsInline 
+                autoPlay
+                preload="auto" 
+                className="grid-item-video"
+                onLoadedData={(e) => {
+                  // Ensure video plays when loaded
+                  e.target.play().catch(() => {
+                    // Ignore autoplay errors
+                  });
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <FullscreenModal />
+    </div>
+  );
+}
+
