@@ -16,7 +16,7 @@ shapes how I write and design for the web: <br />
 as something tactile, rhythmic, and emotional. <br />
 
 <br />
-I'm drawn to projects that merge the poetic with the technical <br />
+I&apos;m drawn to projects that merge the poetic with the technical <br />
 websites, installations, collaborations that feel  
 conscious and alive. <br />
 
