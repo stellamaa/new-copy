@@ -74,7 +74,7 @@ export default function ArtPage() {
         </div>
 
         <audio id="gender-audio" preload="auto">
-          <source src="/assets/Up and onward master.wav" type="audio/wav" />
+          <source src="https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/Up and onward master.wav" type="audio/wav" />
         </audio>
         <audio id="flaw-audio" preload="auto">
           <source src="/assets/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
@@ -92,13 +92,13 @@ export default function ArtPage() {
           </video>
           <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" />
           <video className="preview-video" id="sculpture-video" muted loop playsInline>
-            <source src="/assets/sculpture.mov" type="video/mp4" />
+            <source src="https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/sculpture.mov" type="video/mp4" />
           </video>
         </div>
 
         <div className="media-preview2" id="gender-media-preview">
           <video className="preview-video2" id="gender-video" muted loop playsInline>
-            <source src="/assets/GenderLondon.mp4" type="video/mp4" />
+            <source src="https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/GenderLondon.mp4" type="video/mp4" />
           </video>
         </div>
 

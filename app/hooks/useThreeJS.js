@@ -133,8 +133,7 @@ export function useThreeJS(onMediaClick) {
             material = new THREE.MeshBasicMaterial({
               map: videoTexture,
               transparent: true,
-              side: THREE.DoubleSide,
-              opacity: 1.0
+              side: THREE.DoubleSide
             });
           } else {
             const texture = textureLoader.load(
@@ -149,8 +148,7 @@ export function useThreeJS(onMediaClick) {
             material = new THREE.MeshBasicMaterial({
               map: texture,
               transparent: true,
-              side: THREE.DoubleSide,
-              opacity: 1.0
+              side: THREE.DoubleSide
             });
           }
 
@@ -202,9 +200,7 @@ export function useThreeJS(onMediaClick) {
 
             material = new THREE.MeshBasicMaterial({
               map: videoTexture,
-              side: THREE.DoubleSide,
-              opacity: 1.0,
-              transparent: false
+              side: THREE.DoubleSide
             });
           } else {
             const texture = textureLoader.load(
@@ -218,31 +214,22 @@ export function useThreeJS(onMediaClick) {
 
             material = new THREE.MeshBasicMaterial({
               map: texture,
-              side: THREE.DoubleSide,
-              opacity: 1.0,
-              transparent: false
+              side: THREE.DoubleSide
             });
           }
 
           const plane = new THREE.Mesh(geometry, material);
           const position = positions[index] || { x: 0, y: 0, z: 0 };
-          // Start with straight forward rotation (0, 0, 0)
+          const rotation = rotations[index] || { x: 0, y: 0, z: 0 };
           plane.position.set(position.x, position.y, position.z);
-          plane.rotation.set(0, 0, 0);
-
-          // Store target rotation and rotation speed for slow turning
-          const targetRotation = rotations[index] || { x: 0, y: 0, z: 0 };
-          const rotationSpeed = 0.0002; // Slow rotation speed
+          plane.rotation.set(rotation.x, rotation.y, rotation.z);
 
           plane.userData = {
             media,
             index,
             video: videoElement,
             tiltAttributes: tiltAttributes[index] || { scale: 1 },
-            forwardTilt: forwardTilt[index] || { hasForwardTilt: false, tiltAmount: 0 },
-            targetRotation,
-            rotationSpeed,
-            currentRotation: { x: 0, y: 0, z: 0 }
+            forwardTilt: forwardTilt[index] || { hasForwardTilt: false, tiltAmount: 0 }
           };
 
           sceneRef.current.add(plane);
@@ -302,22 +289,14 @@ export function useThreeJS(onMediaClick) {
         });
       } else {
         const time = Date.now() * 0.001;
+        const groupRotationY = time * 0.0204;
+        const groupRotationX = Math.sin(time * 0.3) * 0.1;
+        const groupRotationZ = Math.cos(time * 0.2) * 0;
 
         planesRef.current.forEach((plane) => {
-          // Slowly rotate towards target rotation
-          const userData = plane.userData;
-          if (userData.targetRotation && userData.rotationSpeed) {
-            const target = userData.targetRotation;
-            const current = userData.currentRotation;
-            const speed = userData.rotationSpeed;
-
-            // Gradually interpolate towards target rotation
-            current.x += (target.x - current.x) * speed;
-            current.y += (target.y - current.y) * speed;
-            current.z += (target.z - current.z) * speed;
-
-            plane.rotation.set(current.x, current.y, current.z);
-          }
+          plane.rotation.y = groupRotationY;
+          plane.rotation.x = groupRotationX;
+          plane.rotation.z = groupRotationZ;
 
           const forwardTiltData = plane.userData.forwardTilt;
           if (forwardTiltData?.hasForwardTilt) {
