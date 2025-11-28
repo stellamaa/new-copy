@@ -1,18 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Disable webpack cache in production to prevent large cache files
+  // Disable webpack cache completely to prevent large cache files
   webpack: (config, { dev, isServer }) => {
-    // Disable webpack cache for production builds to avoid 25MB limit on Cloudflare Pages
-    if (!dev) {
-      config.cache = false;
-      // Also disable persistent caching
-      if (config.optimization) {
-        config.optimization.moduleIds = 'deterministic';
-      }
+    // Completely disable webpack cache for all builds to avoid 25MB limit on Cloudflare Pages
+    config.cache = false;
+    
+    // Remove any cache-related plugins
+    if (config.plugins) {
+      config.plugins = config.plugins.filter(
+        plugin => !(plugin && plugin.constructor && plugin.constructor.name === 'CachePlugin')
+      );
     }
+    
     return config;
   },
+  // Set output to standalone to reduce build artifacts
+  output: 'standalone',
 }
 
 module.exports = nextConfig
