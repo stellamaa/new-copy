@@ -15,8 +15,6 @@ const nextConfig = {
     
     return config;
   },
-  // Set output to standalone to reduce build artifacts
-  output: 'standalone',
 }
 
 module.exports = nextConfig
