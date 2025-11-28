@@ -1,0 +1,7 @@
+# Exclude webpack cache files from Cloudflare Pages deployment
+cache/
+.next/cache/
+node_modules/.cache/
+*.pack
+*.cache
+
