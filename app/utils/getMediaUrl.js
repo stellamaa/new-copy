@@ -4,7 +4,7 @@
  */
 
 // Public R2 bucket URL - files are hosted here to avoid 25MB limit
-const R2_BASE_URL = process.env.NEXT_PUBLIC_R2_URL || 'https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev';
+const R2_BASE_URL = process.env.NEXT_PUBLIC_R2_URL || 'https://media.stellamathioudakis.com';
 
 // Files that should be loaded from R2 (files over 25MB)
 const R2_FILES = [

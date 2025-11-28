@@ -14,7 +14,7 @@ These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 8. ⚠️ `stellavideo.mov` (86MB) - Check if used in codebase
 
 ## R2 Bucket URL
-**Public URL**: `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev`
+**Public URL**: `https://media.stellamathioudakis.com`
 
 ## How to Upload Files
 
@@ -23,7 +23,7 @@ These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 2. Navigate to **R2** → Your bucket (`stellanew-media`)
 3. Click **Upload**
 4. Upload each file from the list above
-5. Files will be accessible at: `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/[filename]`
+5. Files will be accessible at: `https://media.stellamathioudakis.com/[filename]`
 
 ### Option 2: Via Upload Script
 1. Set up `.env` file with R2 credentials (see GET_R2_CREDENTIALS.md)
@@ -32,13 +32,13 @@ These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 ## Verification
 
 After uploading, verify files are accessible:
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/rielavideo.mp4`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/fionavideo.mp4`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/nynspacevideo.mp4`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/stellaoldvideo.mp4`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/sculpture.mov`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/GenderLondon.mp4`
-- `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev/Up and onward master.wav`
+- `https://media.stellamathioudakis.com/rielavideo.mp4`
+- `https://media.stellamathioudakis.com/fionavideo.mp4`
+- `https://media.stellamathioudakis.com/nynspacevideo.mp4`
+- `https://media.stellamathioudakis.com/stellaoldvideo.mp4`
+- `https://media.stellamathioudakis.com/sculpture.mov`
+- `https://media.stellamathioudakis.com/GenderLondon.mp4`
+- `https://media.stellamathioudakis.com/Up and onward master.wav`
 
 ## Code Status
 

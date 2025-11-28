@@ -3,7 +3,7 @@
 Based on your information:
 - **Account ID**: `24a52f2208fab0de762199f2e4ec0029`
 - **Bucket Name**: `stellanew-media`
-- **Public URL**: `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev`
+- **Public URL**: `https://media.stellamathioudakis.com`
 
 ## Step-by-Step: Create R2 API Token
 
@@ -41,7 +41,7 @@ R2_ACCOUNT_ID=24a52f2208fab0de762199f2e4ec0029
 R2_ACCESS_KEY_ID=your_access_key_id_here
 R2_SECRET_ACCESS_KEY=your_secret_access_key_here
 R2_BUCKET_NAME=stellanew-media
-R2_PUBLIC_URL=https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev
+R2_PUBLIC_URL=https://media.stellamathioudakis.com
 ```
 
 Replace `your_access_key_id_here` and `your_secret_access_key_here` with the values you copied.
@@ -50,7 +50,7 @@ Replace `your_access_key_id_here` and `your_secret_access_key_here` with the val
 
 Add this environment variable in Cloudflare Pages:
 - **Variable name**: `NEXT_PUBLIC_R2_URL`
-- **Value**: `https://pub-7a5f5483ebe64449a38b9dcb92d4618c.r2.dev`
+- **Value**: `https://media.stellamathioudakis.com`
 
 ## Alternative: If You Can't Find "Manage R2 API Tokens"
 
