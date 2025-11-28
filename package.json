@@ -17,9 +17,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
-    "@aws-sdk/client-s3": "^3.490.0",
-    "dotenv": "^16.3.1"
+    "eslint-config-next": "14.2.5"
   }
 }
 
