@@ -25,3 +25,4 @@ cacheDirs.forEach(dir => {
 
 console.log('Cache cleanup complete!');
 
+
