@@ -9,7 +9,7 @@ const R2_BASE_URL = process.env.NEXT_PUBLIC_R2_URL || 'https://media.stellamathi
 // Files that should be loaded from R2 (files over 25MB)
 const R2_FILES = [
   'stellavideo.mov',
-  'Up and onward master.wav',
+  'Upandonwardmaster.wav',
   'GenderLondon.mp4',
   'stellaoldvideo.mp4',
   'rielavideo.mp4',

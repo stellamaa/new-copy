@@ -47,7 +47,7 @@ next-env.d.ts
 # Files over 25MB for Cloudflare Pages deployment
 public/assets/stellaoldsite.mov
 public/assets/stellavideo.mov
-public/assets/Up and onward master.wav
+public/assets/Upandonwardmaster.wav
 public/assets/GenderLondon.mp4
 public/assets/stellaoldvideo.mp4
 public/assets/rielavideo.mp4
