@@ -235,12 +235,12 @@ body {
 @media (max-width: 768px) {
     /* Move random images higher (more centered) on mobile */
     .random-image-left {
-        top: 30% !important;
+        top: 20% !important;
         transform: translateY(-50%) !important;
     }
     
     .random-image-right {
-        top: 30% !important;
+        top: 40% !important;
         transform: translateY(-50%) !important;
     }
     
