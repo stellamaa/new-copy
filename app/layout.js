@@ -8,7 +8,12 @@ const inter = Inter({
 
 export const metadata = {
   title: 'stella mathioudakis',
-  description: 'Portfolio for development, design, art, and music by Stella Mathioudakis.'
+  description: 'Portfolio for development, design, art, and music by Stella Mathioudakis.',
+  icons: {
+    icon: '/assets/S.png',
+    shortcut: '/assets/S.png',
+    apple: '/assets/S.png',
+  },
 };
 
 export default function RootLayout({ children }) {
