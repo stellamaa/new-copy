@@ -235,7 +235,7 @@ body {
 @media (max-width: 768px) {
     /* Move random images higher (more centered) on mobile */
     .random-image-left {
-        top: 20% !important;
+        top: 40% !important;
         transform: translateY(-50%) !important;
     }
     
@@ -992,54 +992,23 @@ body {
         object-fit: contain !important;
     }
 
-    /* Show three-container when in 3D mode (not in grid mode) */
-    #three-container {
-        z-index: 2 !important;
-        position: absolute !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        top: 0 !important;
-        left: 0 !important;
-    }
-    
-    /* When three-container has display:block (3D mode active) - match various formats */
+    /* Disable 3D container completely on mobile - always hidden */
+    #three-container,
     #three-container[style*="block"],
     #three-container[style*="display: block"],
-    #three-container[style*="display:block"] {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-    
-    /* When three-container has display:none (grid mode active) - match various formats */
-    #three-container[style*="none"]:not([style*="block"]),
-    #three-container[style*="display: none"],
-    #three-container[style*="display:none"] {
+    #three-container[style*="display:block"],
+    .development-page.active #three-container,
+    .development-page.active #three-container:not([style*="none"]) {
         display: none !important;
         visibility: hidden !important;
         pointer-events: none !important;
-    }
-
-    /* Only force display when not in grid mode (respect inline styles) */
-    .development-page.active #three-container:not([style*="none"]) {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    
-    /* Respect inline style when it says display:none (grid mode) */
-    .development-page.active #three-container[style*="none"] {
-        display: none !important;
-        visibility: hidden !important;
+        opacity: 0 !important;
     }
 
     #three-container canvas {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 100% !important;
-        height: 100% !important;
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     .development-text {

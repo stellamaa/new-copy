@@ -10,6 +10,17 @@ export default function DevelopmentPageAlternative() {
   const [isGridMode, setIsGridMode] = useState(true); // Grid is default
   const threeContainerRef = useRef(null);
   const [displayedText, setDisplayedText] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleMediaClick = (media) => {
     if (media.type === 'video' && media.url) {
@@ -22,10 +33,15 @@ export default function DevelopmentPageAlternative() {
   };
 
   // Pass isGridMode to the hook - it will initialize when grid mode is false
-  useThreeJSAlternative(threeContainerRef, handleMediaClick, isGridMode);
+  // On mobile, always pass true to prevent 3D initialization
+  useThreeJSAlternative(threeContainerRef, handleMediaClick, isGridMode || isMobile);
   useDevelopmentText();
 
   const toggleGridMode = () => {
+    // Prevent toggle on mobile - always stay in grid mode
+    if (isMobile) {
+      return;
+    }
     setIsGridMode(!isGridMode);
   };
 
@@ -67,10 +83,12 @@ export default function DevelopmentPageAlternative() {
       <button className="close-development" id="close-development">
         ×
       </button>
-      <button className="grid-toggle" id="grid-toggle" onClick={toggleGridMode}>
-        {isGridMode ? '3D' : 'grid'}
-      </button>
-      <div id="three-container" ref={threeContainerRef} style={{ display: isGridMode ? 'none' : 'block' }}></div>
+      {!isMobile && (
+        <button className="grid-toggle" id="grid-toggle" onClick={toggleGridMode}>
+          {isGridMode ? '3D' : 'grid'}
+        </button>
+      )}
+      <div id="three-container" ref={threeContainerRef} style={{ display: (isGridMode || isMobile) ? 'none' : 'block' }}></div>
       <div className="development-text">
         <p>
           A few projects made with React, Typescript, Javascript, generative art sketches made with p5.js. If you would
