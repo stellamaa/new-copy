@@ -1405,6 +1405,67 @@ body {
     #email {
         text-decoration: none !important;
     }
+    
+    /* Hide video controls and ensure autoplay on mobile */
+    video {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    /* Hide all webkit video controls */
+    video::-webkit-media-controls {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-enclosure {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-panel {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-play-button {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-start-playback-button {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-timeline {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-current-time-display {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-time-remaining-display {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-mute-button {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-volume-slider {
+        display: none !important;
+    }
+    
+    video::-webkit-media-controls-fullscreen-button {
+        display: none !important;
+    }
+    
+    /* Remove controls attribute if present */
+    video[controls] {
+        pointer-events: none !important;
+    }
+    
+    /* Hide native controls overlay */
+    video::--webkit-media-controls-overlay-play-button {
+        display: none !important;
+    }
 
     .grid-toggle {
         position: fixed !important;

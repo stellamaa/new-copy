@@ -8,6 +8,17 @@ import { useDevelopmentGrid } from '../hooks/useDevelopmentGrid';
 import FullscreenModal from './FullscreenModal';
 
 export default function DevelopmentPage() {
+  // Ensure videos autoplay on mobile
+  useEffect(() => {
+    const videos = document.querySelectorAll('.development-grid-item video');
+    videos.forEach((video) => {
+      if (video instanceof HTMLVideoElement) {
+        video.play().catch(() => {
+          // Ignore autoplay errors (browser may block autoplay)
+        });
+      }
+    });
+  }, []);
   const handleMediaClick = (media) => {
     if (media.type === 'video' && media.url) {
       window.open(media.url, '_blank', 'noopener,noreferrer');
@@ -53,7 +64,15 @@ export default function DevelopmentPage() {
               role="button"
               tabIndex={0}
             >
-              <video src={media.src} muted loop playsInline preload="metadata" />
+              <video 
+                src={media.src} 
+                muted 
+                loop 
+                playsInline 
+                autoPlay
+                preload="auto"
+                style={{ pointerEvents: 'none' }}
+              />
               {media.url && <span className="development-grid-item-label">Open project</span>}
             </div>
           );
