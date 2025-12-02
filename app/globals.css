@@ -1377,7 +1377,7 @@ body {
         right: auto !important;
         z-index: 10000 !important;
         font-size: 24px !important;
-        color: inherit !important;
+        color: #414141 !important; /* Dark color for light mode */
         padding: 0px 0px !important;
         font-weight: 200 !important;
     }
