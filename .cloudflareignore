@@ -5,4 +5,18 @@ node_modules/.cache/
 *.pack
 *.cache
 
+# Exclude large media files (hosted on R2)
+public/assets/stellavideo.mov
+public/assets/Up and onward master.wav
+public/assets/Upandonwardmaster.wav
+public/assets/GenderLondon.mp4
+public/assets/stellaoldvideo.mp4
+public/assets/rielavideo.mp4
+public/assets/fionavideo.mp4
+public/assets/nynspacevideo.mp4
+public/assets/sculpture.mov
+
+# Exclude temp directory
+.temp-large-files/
+
 

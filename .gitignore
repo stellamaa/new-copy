@@ -54,3 +54,6 @@ public/assets/rielavideo.mp4
 public/assets/fionavideo.mp4
 public/assets/nynspacevideo.mp4
 public/assets/sculpture.mov
+
+# Temp directory for build process
+.temp-large-files/
