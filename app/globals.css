@@ -1356,18 +1356,36 @@ body {
     .close-about, .close-art, .close-development, .close-modal {
         position: fixed !important;
         bottom: 15px !important;
-        right: 50px !important; /* Aligned with theme toggle */
+        right: 60px !important; /* Slightly more space from theme toggle */
         left: auto !important;
         top: auto !important;
-        z-index: 10000 !important;
-        font-size: 24px !important;
+        z-index: 99999 !important; /* Very high z-index to ensure visibility */
+        font-size: 32px !important; /* Larger for better visibility */
         color: #414141 !important; /* Dark color for light mode */
-        padding: 0px 0px !important;
-        font-weight: 200 !important;
+        padding: 5px !important; /* Add padding for better touch target */
+        font-weight: 300 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: transparent !important;
+        line-height: 1 !important;
+        width: auto !important;
+        height: auto !important;
     }
 
     .dark .close-about, .dark .close-art, .dark .close-development, .dark .close-modal {
         color: #ffffff !important;
+    }
+    
+    /* Ensure close buttons are visible when pages are active on mobile */
+    .development-page.active .close-development,
+    .about-page.active .close-about,
+    .art-page.active .close-art {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 99999 !important;
     }
     
     /* Remove underline from email on mobile */
@@ -1605,6 +1623,9 @@ body {
 .list-table td {
     width: 90vw !important;
    
+}
+.contact-section h3 {
+    margin-bottom: 10px !important;
 }
 }
 /* Image Placeholder */
