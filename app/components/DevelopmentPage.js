@@ -28,12 +28,7 @@ export default function DevelopmentPage() {
         ×
       </button>
       <div id="three-container"></div>
-      <div className="development-text">
-        <p>
-          A few projects made with React, Typescript, Javascript, generative art sketches made with p5.js. If you would
-          like to see my UX case studies send me an email.{' '}
-        </p>
-      </div>
+
       <div className="development-grid" id="development-grid">
         {mediaFiles.map((media) => {
           if (media.type === 'image') {
