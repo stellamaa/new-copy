@@ -11,9 +11,11 @@ export default function DevelopmentPageAlternative() {
   const threeContainerRef = useRef(null);
   const [displayedText, setDisplayedText] = useState('');
   const [isMobile, setIsMobile] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Detect mobile on mount and resize
   useEffect(() => {
+    setIsMounted(true);
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -95,7 +97,7 @@ export default function DevelopmentPageAlternative() {
           like to see my UX case studies send me an email.{' '}
         </p>
       </div>
-      <div className="recent-projects-title">{(typeof window !== 'undefined' && window.innerWidth <= 768) ? displayedText : 'recent projects'}</div>
+      <div className="recent-projects-title">{isMounted && isMobile ? displayedText : 'recent projects'}</div>
       <div className="development-grid" id="development-grid" style={{ display: isGridMode ? 'grid' : 'none' }}>
         {mediaFiles.map((media) => {
           // Extract title from filename or use URL domain for videos

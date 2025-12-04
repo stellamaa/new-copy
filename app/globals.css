@@ -328,34 +328,6 @@ body {
     transform: translateY(0) !important;
 }
 
-.development-text {
-    position: absolute;
-    top: 90%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
-    z-index: 3000 !important;
-    pointer-events: auto;
-    text-align: center;
-    mix-blend-mode: normal;
-    cursor: pointer;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-}
-
-.development-text p {
-    font-size: 1rem;
-    font-weight: 300;
-    margin: 0;
-    text-align: justify;
-    color: #000000 !important;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 10px 15px;
-    border-radius: 4px;
-}
 
 .development-text .char {
     display: inline-block;
@@ -1355,9 +1327,9 @@ body {
 @media (max-width: 768px) {
     .close-about, .close-art, .close-development, .close-modal {
         position: fixed !important;
-        bottom: 15px !important;
-        right: 60px !important; /* Slightly more space from theme toggle */
-        left: auto !important;
+        bottom: 5px !important;
+        left: 5px !important; /* Slightly more space from theme toggle */
+        right: auto !important;
         top: auto !important;
         z-index: 99999 !important; /* Very high z-index to ensure visibility */
         font-size: 32px !important; /* Larger for better visibility */
