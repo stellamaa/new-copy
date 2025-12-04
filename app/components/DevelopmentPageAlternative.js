@@ -90,7 +90,11 @@ export default function DevelopmentPageAlternative() {
           {isGridMode ? '3D' : 'grid'}
         </button>
       )}
-      <div id="three-container" ref={threeContainerRef} style={{ display: (isGridMode || isMobile) ? 'none' : 'block' }}></div>
+      <div 
+        id="three-container" 
+        ref={threeContainerRef} 
+        className={(!isGridMode && !isMobile) ? 'active' : ''}
+      ></div>
       <div className="development-text">
         <p>
           A few projects made with React, Typescript, Javascript, generative art sketches made with p5.js. If you would
@@ -98,7 +102,10 @@ export default function DevelopmentPageAlternative() {
         </p>
       </div>
       <div className="recent-projects-title">{isMounted && isMobile ? displayedText : 'recent projects'}</div>
-      <div className="development-grid" id="development-grid" style={{ display: isGridMode ? 'grid' : 'none' }}>
+      <div 
+        className={`development-grid ${isGridMode ? 'active' : ''}`} 
+        id="development-grid"
+      >
         {mediaFiles.map((media) => {
           // Extract title from filename or use URL domain for videos
           const getTitle = () => {
