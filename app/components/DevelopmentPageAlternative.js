@@ -121,13 +121,7 @@ export default function DevelopmentPageAlternative() {
         id="three-container" 
         ref={threeContainerRef} 
         className={(!isGridMode && !isMobile) ? 'active' : ''}
-      ></div>
-      <div className="development-text">
-        <p>
-          A few projects made with React, Typescript, Javascript, generative art sketches made with p5.js. If you would
-          like to see my UX case studies send me an email.{' '}
-        </p>
-      </div>
+      >      </div>
       <div className="recent-projects-title">{isMounted && isMobile ? displayedText : 'recent projects'}</div>
       <div 
         className={`development-grid ${isGridMode ? 'active' : ''}`} 

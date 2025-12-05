@@ -42,6 +42,18 @@ export default function FullscreenModal() {
       });
     }
 
+    // Handle Escape key to close fullscreen modal
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('fullscreen-modal');
+        if (modal && modal.classList.contains('active')) {
+          closeFullscreenModal();
+        }
+      }
+    };
+
+    registerListener(document, 'keydown', handleKeyDown);
+
     // Make showFullscreenImage available globally
     window.showFullscreenImage = (imageSrc) => {
       const modal = document.getElementById('fullscreen-modal');
