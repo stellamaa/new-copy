@@ -3,16 +3,54 @@
 import { useEffect } from 'react';
 
 export default function ArtPage() {
-  // Ensure videos autoplay on mobile
+  // Load and play videos/audio only when art page is active
   useEffect(() => {
-    const videos = document.querySelectorAll('.preview-video, .preview-video2');
-    videos.forEach((video) => {
-      if (video instanceof HTMLVideoElement) {
-        video.play().catch(() => {
-          // Ignore autoplay errors (browser may block autoplay)
+    const loadMedia = () => {
+      const artPage = document.getElementById('art-page');
+      const isPageActive = artPage?.classList.contains('active');
+      
+      if (isPageActive) {
+        // Load audio files
+        const audioElements = document.querySelectorAll('#gender-audio, #flaw-audio, #restriction-audio, #amazon-audio');
+        audioElements.forEach((audio) => {
+          if (audio instanceof HTMLAudioElement && audio.preload === 'none') {
+            audio.preload = 'auto';
+            audio.load();
+          }
+        });
+
+        // Load and play videos
+        const videos = document.querySelectorAll('.preview-video, .preview-video2');
+        videos.forEach((video) => {
+          if (video instanceof HTMLVideoElement) {
+            if (video.preload === 'none') {
+              video.preload = 'auto';
+              video.load();
+            }
+            video.play().catch(() => {
+              // Ignore autoplay errors (browser may block autoplay)
+            });
+          }
         });
       }
-    });
+    };
+
+    // Check immediately
+    loadMedia();
+
+    // Listen for when the page becomes active
+    const artPage = document.getElementById('art-page');
+    if (artPage) {
+      const observer = new MutationObserver(() => {
+        loadMedia();
+      });
+      observer.observe(artPage, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+
+      return () => observer.disconnect();
+    }
   }, []);
 
   return (
@@ -87,37 +125,37 @@ export default function ArtPage() {
           </table>
         </div>
 
-        <audio id="gender-audio" preload="auto">
+        <audio id="gender-audio" preload="none">
           <source src="https://media.stellamathioudakis.com/Up and onward master.wav" type="audio/wav" />
         </audio>
-        <audio id="flaw-audio" preload="auto">
+        <audio id="flaw-audio" preload="none">
           <source src="/assets/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="restriction-audio" preload="auto">
+        <audio id="restriction-audio" preload="none">
           <source src="/assets/loop1.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="amazon-audio" preload="auto">
+        <audio id="amazon-audio" preload="none">
           <source src="/assets/in a world in amazon FINAL.mp3" type="audio/mpeg" />
         </audio>
 
         <div className="media-preview" id="media-preview">
-          <video className="preview-video" id="kt-video" muted loop playsInline autoPlay>
+          <video className="preview-video" id="kt-video" muted loop playsInline autoPlay preload="none">
             <source src="/assets/KT.mov" type="video/mp4" />
           </video>
-          <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" />
-          <video className="preview-video" id="sculpture-video" muted loop playsInline autoPlay>
+          <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" loading="lazy" />
+          <video className="preview-video" id="sculpture-video" muted loop playsInline autoPlay preload="none">
             <source src="https://media.stellamathioudakis.com/sculpture.mov" type="video/mp4" />
           </video>
         </div>
 
         <div className="media-preview2" id="gender-media-preview">
-          <video className="preview-video2" id="gender-video" muted loop playsInline autoPlay>
+          <video className="preview-video2" id="gender-video" muted loop playsInline autoPlay preload="none">
             <source src="https://media.stellamathioudakis.com/GenderLondon.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div className="media-preview" id="flaw-media-preview">
-          <img className="preview-image" id="flaw-image" src="/assets/FLAW.jpg" alt="FLAW" />
+          <img className="preview-image" id="flaw-image" src="/assets/FLAW.jpg" alt="FLAW" loading="lazy" />
         </div>
       </div>
     </div>

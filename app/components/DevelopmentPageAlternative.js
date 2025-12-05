@@ -47,17 +47,44 @@ export default function DevelopmentPageAlternative() {
     setIsGridMode(!isGridMode);
   };
 
-  // Ensure videos play when grid mode is active
+  // Load and play videos only when development page is active and grid mode is on
   useEffect(() => {
-    if (isGridMode) {
-      const videos = document.querySelectorAll('.grid-item-video');
-      videos.forEach((video) => {
-        if (video instanceof HTMLVideoElement) {
-          video.play().catch(() => {
-            // Ignore autoplay errors (browser may block autoplay)
-          });
-        }
+    const loadVideos = () => {
+      const developmentPage = document.getElementById('development-page');
+      const isPageActive = developmentPage?.classList.contains('active');
+      
+      if (isGridMode && isPageActive) {
+        const videos = document.querySelectorAll('.grid-item-video');
+        videos.forEach((video) => {
+          if (video instanceof HTMLVideoElement) {
+            // Only load video when page is active
+            if (video.preload === 'none') {
+              video.preload = 'auto';
+              video.load();
+            }
+            video.play().catch(() => {
+              // Ignore autoplay errors (browser may block autoplay)
+            });
+          }
+        });
+      }
+    };
+
+    // Check immediately
+    loadVideos();
+
+    // Also listen for when the page becomes active
+    const developmentPage = document.getElementById('development-page');
+    if (developmentPage) {
+      const observer = new MutationObserver(() => {
+        loadVideos();
       });
+      observer.observe(developmentPage, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+
+      return () => observer.disconnect();
     }
   }, [isGridMode]);
 
@@ -169,7 +196,7 @@ export default function DevelopmentPageAlternative() {
                 loop 
                 playsInline 
                 autoPlay
-                preload="auto" 
+                preload="none" 
                 className="grid-item-video"
                 onLoadedData={(e) => {
                   // Ensure video plays when loaded
