@@ -25,16 +25,15 @@ export default function RootLayout({ children }) {
             __html: `
               (function() {
                 try {
-                  const saved = localStorage.getItem('theme');
-                  // Only apply dark mode if explicitly saved as 'dark'
-                  // Otherwise, default to light mode (no dark class)
-                  if (saved === 'dark') {
+                  // Randomly choose between light and dark mode on each render
+                  const isDark = Math.random() >= 0.5;
+                  if (isDark) {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {
-                  // If localStorage fails, ensure light mode (no dark class)
+                  // If there's an error, default to light mode
                   document.documentElement.classList.remove('dark');
                 }
               })();
