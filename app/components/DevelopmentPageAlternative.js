@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { mediaFiles } from '../constants/mediaFiles';
 import { useThreeJSAlternative } from '../hooks/useThreeJSAlternative';
-import { useDevelopmentText } from '../hooks/useDevelopmentText';
 import FullscreenModal from './FullscreenModal';
 
 export default function DevelopmentPageAlternative() {
@@ -37,7 +36,6 @@ export default function DevelopmentPageAlternative() {
   // Pass isGridMode to the hook - it will initialize when grid mode is false
   // On mobile, always pass true to prevent 3D initialization
   useThreeJSAlternative(threeContainerRef, handleMediaClick, isGridMode || isMobile);
-  useDevelopmentText();
 
   const toggleGridMode = () => {
     // Prevent toggle on mobile - always stay in grid mode

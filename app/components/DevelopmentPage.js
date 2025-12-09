@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { mediaFiles } from '../constants/mediaFiles';
 import { useThreeJS } from '../hooks/useThreeJS';
-import { useDevelopmentText } from '../hooks/useDevelopmentText';
 import { useDevelopmentGrid } from '../hooks/useDevelopmentGrid';
 import FullscreenModal from './FullscreenModal';
 
@@ -30,7 +29,6 @@ export default function DevelopmentPage() {
   };
 
   useThreeJS(handleMediaClick);
-  useDevelopmentText();
   useDevelopmentGrid();
 
   return (
