@@ -788,6 +788,15 @@ body {
     display: none;
 }
 
+/* Ensure close buttons are visible on mobile - override base display: none */
+@media (max-width: 768px) {
+    .close-art,
+    .close-about,
+    .close-development {
+        display: block !important;
+    }
+}
+
 /* Show close-art only when art page is active */
 .art-page.active .close-art {
     display: block;
@@ -1126,6 +1135,12 @@ body {
     transition: color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.contact-section #email {
+    text-decoration: none !important;
+    -webkit-text-decoration: none !important;
+    text-decoration-line: none !important;
+}
+
 
 
 .close-about {
@@ -1329,6 +1344,13 @@ body {
     .about-page  {
         padding: 10px 10px 10px 10px !important;
     }
+    
+    /* Remove underline from email on mobile */
+    #email {
+        text-decoration: none !important;
+        -webkit-text-decoration: none !important;
+        text-decoration-line: none !important;
+    }
 
     .art-page {
         padding: 10px 10px 10px 10px !important;
@@ -1388,11 +1410,31 @@ body {
         right: 60px !important;
     }
     
-    /* Override any display: none from base styles */
+    /* Override any display: none from base styles - ensure buttons are always visible on mobile */
+    /* Use multiple selectors to increase specificity and ensure override */
     .art-page .close-art,
     .development-page .close-development,
-    .about-page .close-about {
+    .about-page .close-about,
+    .art-page.active .close-art,
+    .development-page.active .close-development,
+    .about-page.active .close-about,
+    #art-page .close-art,
+    #development-page .close-development,
+    #about-page .close-about {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        bottom: 15px !important;
+        right: 60px !important;
+        z-index: 99999 !important;
+    }
+    
+    /* Remove underline from email on mobile */
+    #email {
+        text-decoration: none !important;
+        -webkit-text-decoration: none !important;
+        text-decoration-line: none !important;
     }
     
     /* Hide video controls and ensure autoplay on mobile */
