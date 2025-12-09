@@ -9,7 +9,7 @@ export function useDevelopmentText() {
 
     const { registerListener, registerCleanup, cleanup } = createEventListenerManager();
 
-    const developmentText = document.querySelector('.development-text p');
+    const developmentText = document.querySelector('.development-text ');
     if (!developmentText) return;
 
     const text = developmentText.textContent || '';
@@ -22,7 +22,6 @@ export function useDevelopmentText() {
       return span;
     });
 
-    developmentText.append(...chars);
 
     const handleMouseEnter = () => {
       chars.forEach((char) => {
