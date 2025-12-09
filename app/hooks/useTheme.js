@@ -21,17 +21,26 @@ export function useTheme() {
 
     try {
       const saved = localStorage.getItem('theme');
+      // Default to light mode (white background) - only use dark if explicitly saved
       if (saved === 'dark') {
         root.classList.add('dark');
         toggleBtn.textContent = 'light';
         updateThreeJSBackground(true);
       } else {
+        // Ensure light mode is the default
         root.classList.remove('dark');
         toggleBtn.textContent = 'dark';
         updateThreeJSBackground(false);
+        // Clear any invalid theme preference to ensure light mode
+        if (saved && saved !== 'light') {
+          localStorage.setItem('theme', 'light');
+        }
       }
     } catch (err) {
-      // ignore storage errors
+      // ignore storage errors, but ensure light mode
+      root.classList.remove('dark');
+      toggleBtn.textContent = 'dark';
+      updateThreeJSBackground(false);
     }
 
     const handleClick = () => {

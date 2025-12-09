@@ -792,8 +792,17 @@ body {
 @media (max-width: 768px) {
     .close-art,
     .close-about,
-    .close-development {
+    .close-development,
+    button.close-art,
+    button.close-about,
+    button.close-development,
+    #close-art,
+    #close-about,
+    #close-development {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
     }
 }
 
@@ -1370,7 +1379,10 @@ body {
 
 /* Mobile: Close buttons at bottom left */
 @media (max-width: 768px) {
-    .close-about, .close-art, .close-development, .close-modal {
+    /* Base rule - applies to all close buttons on mobile */
+    .close-about, .close-art, .close-development, .close-modal,
+    button.close-about, button.close-art, button.close-development, button.close-modal,
+    #close-about, #close-art, #close-development, #close-modal {
         position: fixed !important;
         bottom: 15px !important;
         right: 60px !important; /* In line with theme toggle */
@@ -1391,10 +1403,28 @@ body {
         height: auto !important;
         border: none !important;
         cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent !important;
     }
 
     .dark .close-about, .dark .close-art, .dark .close-development, .dark .close-modal {
         color: #ffffff !important;
+    }
+    
+    /* Ensure close buttons are never hidden or covered on mobile */
+    .page .close-about,
+    .page .close-art,
+    .page .close-development,
+    .about-page .close-about,
+    .art-page .close-art,
+    .development-page .close-development {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 99999 !important;
+        position: fixed !important;
+        bottom: 15px !important;
+        right: 60px !important;
     }
     
     /* Ensure close buttons are visible when pages are active on mobile */
