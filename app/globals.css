@@ -1329,11 +1329,6 @@ body {
     .about-page  {
         padding: 10px 10px 10px 10px !important;
     }
-    
-    /* Remove underline from email on mobile */
-    #email {
-        text-decoration: none !important;
-    }
 
     .art-page {
         padding: 10px 10px 10px 10px !important;
@@ -1398,11 +1393,6 @@ body {
     .development-page .close-development,
     .about-page .close-about {
         display: block !important;
-    }
-    
-    /* Remove underline from email on mobile */
-    #email {
-        text-decoration: none !important;
     }
     
     /* Hide video controls and ensure autoplay on mobile */
