@@ -20,26 +20,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  // Randomly choose between light and dark mode on each render
-                  const isDark = Math.random() >= 0.5;
-                  if (isDark) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {
-                  // If there's an error, default to light mode
-                  document.documentElement.classList.remove('dark');
-                }
-              })();
-            `,
-          }}
-        />
         {children}
       </body>
     </html>
