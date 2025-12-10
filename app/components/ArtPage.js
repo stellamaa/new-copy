@@ -129,18 +129,18 @@ export default function ArtPage() {
           <source src="https://media.stellamathioudakis.com/Up and onward master.wav" type="audio/wav" />
         </audio>
         <audio id="flaw-audio" preload="none">
-          <source src="/assets/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
+          <source src="https://media.stellamathioudakis.com/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
         </audio>
         <audio id="restriction-audio" preload="none">
-          <source src="/assets/loop1.mp3" type="audio/mpeg" />
+          <source src="https://media.stellamathioudakis.com/loop1.mp3" type="audio/mpeg" />
         </audio>
         <audio id="amazon-audio" preload="none">
-          <source src="/assets/in a world in amazon FINAL.mp3" type="audio/mpeg" />
+          <source src="https://media.stellamathioudakis.com/in a world in amazon FINAL.mp3" type="audio/mpeg" />
         </audio>
 
         <div className="media-preview" id="media-preview">
           <video className="preview-video" id="kt-video" muted loop playsInline autoPlay preload="none">
-            <source src="/assets/KT.mov" type="video/mp4" />
+            <source src="https://media.stellamathioudakis.com/KT.mov" type="video/mp4" />
           </video>
           <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" loading="lazy" />
           <video className="preview-video" id="sculpture-video" muted loop playsInline autoPlay preload="none">
