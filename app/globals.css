@@ -807,27 +807,11 @@ body {
     display: none;
 }
 
-/* Ensure close buttons are visible on mobile - override base display: none */
-@media (max-width: 768px) {
-    .close-art,
-    .close-about,
-    .close-development,
-    button.close-art,
-    button.close-about,
-    button.close-development,
-    #close-art,
-    #close-about,
-    #close-development {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
+/* Show close-art only when art page is active (desktop) */
+@media (min-width: 769px) {
+    .art-page.active .close-art {
+        display: block;
     }
-}
-
-/* Show close-art only when art page is active */
-.art-page.active .close-art {
-    display: block;
 }
 
 .close-art:hover { opacity: 0.7; }
@@ -1469,7 +1453,13 @@ body {
     .about-page.active .close-about,
     #art-page .close-art,
     #development-page .close-development,
-    #about-page .close-about {
+    #about-page .close-about,
+    #art-page button.close-art,
+    #development-page button.close-development,
+    #about-page button.close-about,
+    button#close-art,
+    button#close-about,
+    button#close-development {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -1477,6 +1467,28 @@ body {
         bottom: 15px !important;
         right: 60px !important;
         z-index: 99999 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Force visibility for close buttons - highest specificity */
+    button.close-art[id="close-art"],
+    button.close-about[id="close-about"],
+    button.close-development[id="close-development"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        bottom: 15px !important;
+        right: 60px !important;
+        z-index: 99999 !important;
+        pointer-events: auto !important;
+        color: #414141 !important;
+    }
+    
+    .dark button.close-art[id="close-art"],
+    .dark button.close-about[id="close-about"],
+    .dark button.close-development[id="close-development"] {
+        color: #ffffff !important;
     }
     
     /* Remove underline from email on mobile */

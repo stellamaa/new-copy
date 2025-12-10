@@ -27,7 +27,13 @@ export default function FullscreenModal() {
       }
 
       if (closeDevelopment) {
-        closeDevelopment.style.display = '';
+        // On mobile, always keep the button visible
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+          closeDevelopment.style.display = 'block';
+        } else {
+          closeDevelopment.style.display = '';
+        }
       }
     };
 
@@ -65,7 +71,11 @@ export default function FullscreenModal() {
         modal.classList.add('active');
 
         if (closeDevelopment) {
-          closeDevelopment.style.display = 'none';
+          // On mobile, always keep the button visible
+          const isMobile = window.innerWidth <= 768;
+          if (!isMobile) {
+            closeDevelopment.style.display = 'none';
+          }
         }
       }
     };
