@@ -1782,3 +1782,42 @@ body {
 .gallery-item:nth-child(7) { animation-delay: 0.7s; }
 .gallery-item:nth-child(8) { animation-delay: 0.8s; }
 
+/* MOBILE OVERRIDE: Close buttons on left side, opposite theme toggle */
+@media (max-width: 768px) {
+    .close-about,
+    .close-art,
+    .close-development,
+    .close-modal,
+    button.close-about,
+    button.close-art,
+    button.close-development,
+    button.close-modal,
+    #close-about,
+    #close-art,
+    #close-development,
+    #close-modal {
+        position: fixed !important;  /* ← Anchor to viewport */
+        bottom: 0% !important;
+        left: 1% !important;
+        z-index: 999999 !important;
+        font-size: 30px !important;
+        color: inherit !important;
+        padding-left: 10px !important;
+        width: 20px !important;
+        height: auto !important;
+        background: transparent !important;
+        padding-bottom: 0px !important;
+    }
+    .about-page,
+.art-page,
+.development-page {
+    position: fixed !important;
+}
+
+    .dark .close-about,
+    .dark .close-art,
+    .dark .close-development,
+    .dark .close-modal {
+        color: inherit !important;
+    }
+}
