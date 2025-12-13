@@ -1197,6 +1197,12 @@ body {
    ======================================== */
 @media (max-width: 768px) {
     /* Site Bio */
+
+.close-about, .close-art ,.close-modal{
+    font-size: 0.9rem !important;
+    padding: 4px 10px !important;
+}
+
     .site-bio {
         position: fixed;
         top: auto;
@@ -1617,7 +1623,7 @@ body {
 /* ========================================
    CONSOLIDATED 480px MEDIA QUERIES
    ======================================== */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
     .email-link {
         text-decoration: none !important;
     }
@@ -1690,10 +1696,10 @@ body {
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
+        bottom: 15px !important;
         left: 2% !important;
         z-index: 999999 !important;
-        font-size: 32px !important;
+        font-size: 0.9rem !important;
         font-family: inherit !important;
         color: #414141 !important;
         cursor: pointer !important;
@@ -1706,7 +1712,7 @@ body {
         width: auto !important;
         height: auto !important;
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 4px 10px !important;
         border: none !important;
         top: auto !important;
         right: auto !important;
