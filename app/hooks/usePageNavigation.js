@@ -207,13 +207,16 @@ export function usePageNavigation() {
         
         [closeAbout, closeArt, closeDevelopment].forEach(button => {
           if (button) {
-            button.style.display = 'block';
-            button.style.visibility = 'visible';
-            button.style.opacity = '1';
-            button.style.position = 'fixed';
-            button.style.bottom = '15px';
-            button.style.right = '60px';
-            button.style.zIndex = '99999';
+            // Remove conflicting inline styles and let CSS handle positioning
+            button.style.display = '';
+            button.style.visibility = '';
+            button.style.opacity = '';
+            button.style.position = '';
+            button.style.bottom = '';
+            button.style.right = '';
+            button.style.left = '';
+            button.style.zIndex = '';
+            // CSS will handle all positioning via !important rules
           }
         });
       }

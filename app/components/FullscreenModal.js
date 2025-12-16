@@ -27,11 +27,10 @@ export default function FullscreenModal() {
       }
 
       if (closeDevelopment) {
-        // On mobile, always keep the button visible
+        // Let CSS handle display on mobile - don't set inline styles
         const isMobile = window.innerWidth <= 768;
-        if (isMobile) {
-          closeDevelopment.style.display = 'block';
-        } else {
+        if (!isMobile) {
+          // Only hide on desktop when modal is open
           closeDevelopment.style.display = '';
         }
       }
@@ -71,9 +70,10 @@ export default function FullscreenModal() {
         modal.classList.add('active');
 
         if (closeDevelopment) {
-          // On mobile, always keep the button visible
+          // On mobile, CSS handles visibility - don't interfere
           const isMobile = window.innerWidth <= 768;
           if (!isMobile) {
+            // Only hide on desktop when modal is open
             closeDevelopment.style.display = 'none';
           }
         }

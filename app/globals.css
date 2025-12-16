@@ -1557,7 +1557,42 @@ body {
         transform: translateY(0) !important;
     }
 
-    /* Close Buttons */
+    /* Close Buttons - Mobile positioning opposite theme toggle */
+    .close-about,
+    .close-art,
+    .close-development,
+    .close-modal {
+        all: unset !important;
+        position: fixed !important;
+        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
+        left: 2% !important;
+        z-index: 999999 !important;
+        font-size: 0.9rem !important;
+        font-family: inherit !important;
+        color: #414141 !important;
+        cursor: pointer !important;
+        line-height: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 4px 10px !important;
+        border: none !important;
+        top: auto !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    .dark .close-about,
+    .dark .close-art,
+    .dark .close-development,
+    .dark .close-modal {
+        color: #ffffff !important;
+    }
    
     /* Theme Toggle */
     #theme-toggle {
@@ -1696,7 +1731,7 @@ body {
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: 15px !important;
+        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
         left: 2% !important;
         z-index: 999999 !important;
         font-size: 0.9rem !important;
