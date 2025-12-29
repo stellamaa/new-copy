@@ -1,58 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-
 export default function ArtPage() {
-  // Load and play videos/audio only when art page is active
-  useEffect(() => {
-    const loadMedia = () => {
-      const artPage = document.getElementById('art-page');
-      const isPageActive = artPage?.classList.contains('active');
-      
-      if (isPageActive) {
-        // Load audio files
-        const audioElements = document.querySelectorAll('#gender-audio, #flaw-audio, #restriction-audio, #amazon-audio');
-        audioElements.forEach((audio) => {
-          if (audio instanceof HTMLAudioElement && audio.preload === 'none') {
-            audio.preload = 'auto';
-            audio.load();
-          }
-        });
-
-        // Load and play videos
-        const videos = document.querySelectorAll('.preview-video, .preview-video2');
-        videos.forEach((video) => {
-          if (video instanceof HTMLVideoElement) {
-            if (video.preload === 'none') {
-              video.preload = 'auto';
-              video.load();
-            }
-            video.play().catch(() => {
-              // Ignore autoplay errors (browser may block autoplay)
-            });
-          }
-        });
-      }
-    };
-
-    // Check immediately
-    loadMedia();
-
-    // Listen for when the page becomes active
-    const artPage = document.getElementById('art-page');
-    if (artPage) {
-      const observer = new MutationObserver(() => {
-        loadMedia();
-      });
-      observer.observe(artPage, {
-        attributes: true,
-        attributeFilter: ['class']
-      });
-
-      return () => observer.disconnect();
-    }
-  }, []);
-
   return (
     <div className="page art-page" id="art-page">
       <button className="close-art" id="close-art">
@@ -125,37 +73,37 @@ export default function ArtPage() {
           </table>
         </div>
 
-        <audio id="gender-audio" preload="none">
+        <audio id="gender-audio" preload="auto">
           <source src="https://media.stellamathioudakis.com/Up and onward master.wav" type="audio/wav" />
         </audio>
-        <audio id="flaw-audio" preload="none">
-          <source src="https://media.stellamathioudakis.com/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
+        <audio id="flaw-audio" preload="auto">
+          <source src="/assets/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="restriction-audio" preload="none">
-          <source src="https://media.stellamathioudakis.com/loop1.mp3" type="audio/mpeg" />
+        <audio id="restriction-audio" preload="auto">
+          <source src="/assets/loop1.mp3" type="audio/mpeg" />
         </audio>
-        <audio id="amazon-audio" preload="none">
-          <source src="https://media.stellamathioudakis.com/in a world in amazon FINAL.mp3" type="audio/mpeg" />
+        <audio id="amazon-audio" preload="auto">
+          <source src="/assets/in a world in amazon FINAL.mp3" type="audio/mpeg" />
         </audio>
 
         <div className="media-preview" id="media-preview">
-          <video className="preview-video" id="kt-video" muted loop playsInline autoPlay preload="none">
-            <source src="https://media.stellamathioudakis.com/KT.mov" type="video/mp4" />
+          <video className="preview-video" id="kt-video" muted loop playsInline>
+            <source src="/assets/KT.mov" type="video/mp4" />
           </video>
-          <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" loading="lazy" />
-          <video className="preview-video" id="sculpture-video" muted loop playsInline autoPlay preload="none">
+          <img className="preview-image" id="mining-image" src="/assets/Mining.jpg" alt="Mining" />
+          <video className="preview-video" id="sculpture-video" muted loop playsInline>
             <source src="https://media.stellamathioudakis.com/sculpture.mov" type="video/mp4" />
           </video>
         </div>
 
         <div className="media-preview2" id="gender-media-preview">
-          <video className="preview-video2" id="gender-video" muted loop playsInline autoPlay preload="none">
+          <video className="preview-video2" id="gender-video" muted loop playsInline>
             <source src="https://media.stellamathioudakis.com/GenderLondon.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div className="media-preview" id="flaw-media-preview">
-          <img className="preview-image" id="flaw-image" src="/assets/FLAW.jpg" alt="FLAW" loading="lazy" />
+          <img className="preview-image" id="flaw-image" src="/assets/FLAW.jpg" alt="FLAW" />
         </div>
       </div>
     </div>

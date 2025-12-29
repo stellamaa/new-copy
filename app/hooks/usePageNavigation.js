@@ -197,31 +197,6 @@ export function usePageNavigation() {
     if (closeDevelopment) registerListener(closeDevelopment, 'click', handleCloseDevelopmentClick);
     registerListener(document, 'keydown', handleKeyDown);
 
-    // Ensure close buttons are visible on mobile
-    const ensureCloseButtonsVisible = () => {
-      const isMobile = window.innerWidth <= 768;
-      if (isMobile) {
-        const closeAbout = document.getElementById('close-about');
-        const closeArt = document.getElementById('close-art');
-        const closeDevelopment = document.getElementById('close-development');
-        
-        [closeAbout, closeArt, closeDevelopment].forEach(button => {
-          if (button) {
-            // Remove conflicting inline styles and let CSS handle positioning
-            button.style.display = '';
-            button.style.visibility = '';
-            button.style.opacity = '';
-            button.style.position = '';
-            button.style.bottom = '';
-            button.style.right = '';
-            button.style.left = '';
-            button.style.zIndex = '';
-            // CSS will handle all positioning via !important rules
-          }
-        });
-      }
-    };
-
     // Initialize landing page - ensure it's visible by default
     try {
       const landingPage = document.getElementById('landing-page');
@@ -234,35 +209,7 @@ export function usePageNavigation() {
       console.error('Landing page display init failed', error);
     }
 
-    // Ensure close buttons are visible on mobile initially and on resize
-    ensureCloseButtonsVisible();
-    const resizeHandler = () => {
-      ensureCloseButtonsVisible();
-    };
-    registerListener(window, 'resize', resizeHandler);
-    
-    // Also ensure visibility when pages become active
-    const observer = new MutationObserver(() => {
-      ensureCloseButtonsVisible();
-    });
-    
-    const aboutPage = document.getElementById('about-page');
-    const artPage = document.getElementById('art-page');
-    const developmentPage = document.getElementById('development-page');
-    
-    [aboutPage, artPage, developmentPage].forEach(page => {
-      if (page) {
-        observer.observe(page, {
-          attributes: true,
-          attributeFilter: ['class']
-        });
-      }
-    });
-
-    return () => {
-      cleanup();
-      observer.disconnect();
-    };
+    return cleanup;
   }, []);
 
   return {

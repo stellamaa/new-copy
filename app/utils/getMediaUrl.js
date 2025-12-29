@@ -6,10 +6,9 @@
 // Public R2 bucket URL - files are hosted here to avoid 25MB limit
 const R2_BASE_URL = process.env.NEXT_PUBLIC_R2_URL || 'https://media.stellamathioudakis.com';
 
-// Files that should be loaded from R2 (files over 25MB or all large media files)
+// Files that should be loaded from R2 (files over 25MB)
 const R2_FILES = [
   'stellavideo.mov',
-  'Up and onward master.wav',
   'Upandonwardmaster.wav',
   'GenderLondon.mp4',
   'stellaoldvideo.mp4',
@@ -17,11 +16,6 @@ const R2_FILES = [
   'fionavideo.mp4',
   'nynspacevideo.mp4',
   'sculpture.mov',
-  'KT.mov',
-  'WAVES OF VIOLENCE.mp3',
-  'loop1.mp3',
-  'in a world in amazon FINAL.mp3',
-  'jeromevideo.mp4',
 ];
 
 export function getMediaUrl(localPath) {

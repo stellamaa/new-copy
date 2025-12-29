@@ -27,12 +27,7 @@ export default function FullscreenModal() {
       }
 
       if (closeDevelopment) {
-        // Let CSS handle display on mobile - don't set inline styles
-        const isMobile = window.innerWidth <= 768;
-        if (!isMobile) {
-          // Only hide on desktop when modal is open
-          closeDevelopment.style.display = '';
-        }
+        closeDevelopment.style.display = '';
       }
     };
 
@@ -47,18 +42,6 @@ export default function FullscreenModal() {
       });
     }
 
-    // Handle Escape key to close fullscreen modal
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        const modal = document.getElementById('fullscreen-modal');
-        if (modal && modal.classList.contains('active')) {
-          closeFullscreenModal();
-        }
-      }
-    };
-
-    registerListener(document, 'keydown', handleKeyDown);
-
     // Make showFullscreenImage available globally
     window.showFullscreenImage = (imageSrc) => {
       const modal = document.getElementById('fullscreen-modal');
@@ -70,12 +53,7 @@ export default function FullscreenModal() {
         modal.classList.add('active');
 
         if (closeDevelopment) {
-          // On mobile, CSS handles visibility - don't interfere
-          const isMobile = window.innerWidth <= 768;
-          if (!isMobile) {
-            // Only hide on desktop when modal is open
-            closeDevelopment.style.display = 'none';
-          }
+          closeDevelopment.style.display = 'none';
         }
       }
     };

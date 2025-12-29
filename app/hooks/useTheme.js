@@ -19,33 +19,19 @@ export function useTheme() {
       window.dispatchEvent(event);
     }
 
-    // Randomly choose between light and dark mode on each page load
-    // Only do this if there's no saved theme preference
     try {
       const saved = localStorage.getItem('theme');
-      let isDark;
-      
-      if (saved === 'dark' || saved === 'light') {
-        // Use saved preference
-        isDark = saved === 'dark';
-      } else {
-        // Randomly choose if no preference is saved
-        isDark = Math.random() >= 0.5;
-      }
-      
-      if (isDark) {
+      if (saved === 'dark') {
         root.classList.add('dark');
+        toggleBtn.textContent = 'light';
+        updateThreeJSBackground(true);
       } else {
         root.classList.remove('dark');
+        toggleBtn.textContent = 'dark';
+        updateThreeJSBackground(false);
       }
-      
-      toggleBtn.textContent = isDark ? 'light' : 'dark';
-      updateThreeJSBackground(isDark);
     } catch (err) {
-      // If localStorage fails, default to light mode
-      root.classList.remove('dark');
-      toggleBtn.textContent = 'dark';
-      updateThreeJSBackground(false);
+      // ignore storage errors
     }
 
     const handleClick = () => {

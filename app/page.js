@@ -21,7 +21,7 @@ export default function HomePage() {
     <div id="app-root" className="invertable">
       <div className="site-bio">
         <span>Stella Mathioudakis</span>
-        <span> design focused developer / sound artist</span>
+        <span> frontend engineer / creative technologist / sound artist</span>
         <span>working across web, code, and sound</span>
         <span>exploring how technology can feel intentional.</span>
         <span>building digital spaces that invite reflection and</span>
