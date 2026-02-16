@@ -1557,16 +1557,16 @@ body {
         transform: translateY(0) !important;
     }
 
-    /* Close Buttons */
+    /* Close Buttons - bottom-left on mobile; raised for Chrome (dynamic viewport) */
     .close-about,
     .close-art,
     .close-development,
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 0px) !important;
-        left: 0% !important;
-        z-index: 999999 !important;
+        bottom: calc(env(safe-area-inset-bottom) + 24px) !important;
+        left: 12px !important;
+        z-index: 2147483647 !important;
         font-size: 1.7rem !important;
         font-weight: lighter !important;
         font-family: inherit !important;
@@ -1585,8 +1585,10 @@ body {
         border: none !important;
         top: auto !important;
         right: auto !important;
-        transform: none !important;
+        transform: translateZ(0) !important;
+        -webkit-transform: translateZ(0) !important;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        isolation: isolate !important;
     }
 
     .dark .close-about,
@@ -1733,9 +1735,9 @@ body {
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 15px) !important;
-        left: 2% !important;
-        z-index: 999999 !important;
+        bottom: calc(env(safe-area-inset-bottom) + 24px) !important;
+        left: 12px !important;
+        z-index: 2147483647 !important;
         font-size: 1.2rem !important;
         font-family: inherit !important;
         color: #414141 !important;
@@ -1753,8 +1755,10 @@ body {
         border: none !important;
         top: auto !important;
         right: auto !important;
-        transform: none !important;
+        transform: translateZ(0) !important;
+        -webkit-transform: translateZ(0) !important;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        isolation: isolate !important;
     }
 
     .dark .close-about,
