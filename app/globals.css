@@ -462,7 +462,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-   box-shadow: none;
+    box-shadow: none;
 }
 
 /* On hover over title, show image/video and hide title */

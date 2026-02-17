@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { mediaFiles } from '../constants/mediaFiles';
 import { createEventListenerManager } from '../utils/eventListeners';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
   const sceneRef = useRef(null);
@@ -205,13 +206,33 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
     function createVideoPreview(group, media) {
       const geometry = new THREE.PlaneGeometry(2, 2.5);
       
+      // Get video source - handle both local paths and full URLs
+      const videoSrc = typeof media.src === 'string' && media.src.startsWith('http')
+        ? media.src
+        : getMediaUrl(media.src);
+      
       // Create video element
       const video = document.createElement('video');
-      video.src = media.src;
+      video.src = videoSrc;
       video.muted = true;
       video.loop = true;
       video.playsInline = true;
-      video.preload = 'metadata';
+      video.preload = 'auto';
+      // Only set crossOrigin if video is from a different origin (R2)
+      // For localhost dev, CORS may not be configured, so we'll try without it first
+      if (videoSrc.startsWith('http') && !videoSrc.includes('localhost')) {
+        video.crossOrigin = 'anonymous';
+      }
+      video.setAttribute('playsinline', '');
+      video.style.display = 'none';
+      video.style.position = 'absolute';
+      video.style.width = '1px';
+      video.style.height = '1px';
+      video.style.opacity = '0';
+      video.style.pointerEvents = 'none';
+      
+      // Add video to DOM (required for VideoTexture in some browsers)
+      document.body.appendChild(video);
       
       const videoTexture = new THREE.VideoTexture(video);
       videoTexture.minFilter = THREE.LinearFilter;
@@ -226,12 +247,27 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
       const mesh = new THREE.Mesh(geometry, material);
       group.add(mesh);
       
-      // Store video reference
+      // Store video and texture references for animation loop
       group.userData.video = video;
+      group.userData.videoTexture = videoTexture;
       
-      // Play video
+      // Ensure video loads and plays
+      video.addEventListener('loadeddata', () => {
+        video.play().catch((err) => {
+          console.warn('Video autoplay failed:', err);
+        });
+      });
+      
+      video.addEventListener('error', (e) => {
+        console.error('Video loading error:', videoSrc, e);
+      });
+      
+      // Start loading immediately
+      video.load();
+      
+      // Try to play immediately (may fail due to autoplay policy)
       video.play().catch(() => {
-        // Ignore autoplay errors
+        // Ignore autoplay errors - video will play when user interacts
       });
     }
 
@@ -380,10 +416,18 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
         controlsRef.current.update();
       }
       
-      // Rotate attachments slowly
+      // Rotate attachments slowly and update video textures
       attachmentsRef.current.forEach((attachment, index) => {
         attachment.rotation.y += 0.005 + index * 0.001;
         attachment.rotation.x += 0.002;
+        
+        // Update video texture if video is ready
+        if (attachment.userData.videoTexture && attachment.userData.video) {
+          const video = attachment.userData.video;
+          if (video.readyState >= 2) { // HAVE_CURRENT_DATA or higher
+            attachment.userData.videoTexture.needsUpdate = true;
+          }
+        }
       });
       
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
@@ -403,6 +447,10 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
           video.pause();
           video.src = '';
           video.load();
+          // Remove video from DOM
+          if (video.parentNode) {
+            video.parentNode.removeChild(video);
+          }
         }
         
         attachment.traverse((child) => {

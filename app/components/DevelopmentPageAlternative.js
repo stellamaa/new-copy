@@ -47,7 +47,7 @@ export default function DevelopmentPageAlternative() {
     setIsGridMode(!isGridMode);
   };
 
-  // Load and play videos only when development page is active and grid mode is on
+  // Load and play videos when development page is active and grid mode is on
   useEffect(() => {
     const loadVideos = () => {
       const developmentPage = document.getElementById('development-page');
@@ -57,8 +57,7 @@ export default function DevelopmentPageAlternative() {
         const videos = document.querySelectorAll('.grid-item-video');
         videos.forEach((video) => {
           if (video instanceof HTMLVideoElement) {
-            // Only load video when page is active
-            if (video.preload === 'none') {
+            if (video.preload !== 'auto') {
               video.preload = 'auto';
               video.load();
             }
@@ -190,7 +189,7 @@ export default function DevelopmentPageAlternative() {
                 loop 
                 playsInline 
                 autoPlay
-                preload="none" 
+                preload="metadata" 
                 className="grid-item-video"
                 onLoadedData={(e) => {
                   // Ensure video plays when loaded
