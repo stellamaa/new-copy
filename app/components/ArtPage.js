@@ -1,5 +1,7 @@
 'use client';
 
+import { getMediaUrl } from '../utils/getMediaUrl';
+
 export default function ArtPage() {
   return (
     <div className="page art-page" id="art-page">
@@ -73,8 +75,9 @@ export default function ArtPage() {
           </table>
         </div>
 
-        <audio id="gender-audio" preload="auto">
-          <source src="https://media.stellamathioudakis.com/Up and onward master.wav" type="audio/wav" />
+        <audio id="gender-audio" preload="auto" crossOrigin="anonymous">
+          <source src={getMediaUrl('/assets/Upandonwardmaster.wav')} type="audio/wav" />
+          <source src={getMediaUrl('/assets/Up and onward master.wav')} type="audio/wav" />
         </audio>
         <audio id="flaw-audio" preload="auto">
           <source src="/assets/WAVES OF VIOLENCE.mp3" type="audio/mpeg" />

@@ -106,6 +106,33 @@ export function useThreeJS(onMediaClick) {
           let material;
           let videoElement = null;
 
+          const planeW = 180;
+          const planeH = 50;
+          const planeAspect = planeW / planeH;
+
+          const applyContainToTexture = (texture, width, height) => {
+            const texAspect = width / height;
+            let repeatX = 1;
+            let repeatY = 1;
+            let offsetX = 0;
+            let offsetY = 0;
+            if (texAspect > planeAspect) {
+              repeatX = 1;
+              repeatY = texAspect / planeAspect;
+              offsetX = 0;
+              offsetY = (1 - repeatY) / 2;
+            } else {
+              repeatX = planeAspect / texAspect;
+              repeatY = 1;
+              offsetX = (1 - repeatX) / 2;
+              offsetY = 0;
+            }
+            texture.wrapS = THREE.ClampToEdgeWrapping;
+            texture.wrapT = THREE.ClampToEdgeWrapping;
+            texture.repeat.set(repeatX, repeatY);
+            texture.offset.set(offsetX, offsetY);
+          };
+
           if (media.type === 'video') {
             const video = document.createElement('video');
             video.src = media.src;
@@ -130,6 +157,12 @@ export function useThreeJS(onMediaClick) {
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.magFilter = THREE.LinearFilter;
 
+            registerListener(video, 'loadedmetadata', () => {
+              if (video.videoWidth && video.videoHeight) {
+                applyContainToTexture(videoTexture, video.videoWidth, video.videoHeight);
+              }
+            });
+
             material = new THREE.MeshBasicMaterial({
               map: videoTexture,
               transparent: true,
@@ -138,7 +171,12 @@ export function useThreeJS(onMediaClick) {
           } else {
             const texture = textureLoader.load(
               media.src,
-              undefined,
+              (tex) => {
+                const img = tex.image;
+                if (img && img.width && img.height) {
+                  applyContainToTexture(tex, img.width, img.height);
+                }
+              },
               undefined,
               () => {}
             );
@@ -169,8 +207,35 @@ export function useThreeJS(onMediaClick) {
         });
       } else {
         // Desktop: Original positioning
+        const planeW = 2.5;
+        const planeH = 1.7;
+        const planeAspect = planeW / planeH;
+
+        const applyContainToTexture = (texture, width, height) => {
+          const texAspect = width / height;
+          let repeatX = 1;
+          let repeatY = 1;
+          let offsetX = 0;
+          let offsetY = 0;
+          if (texAspect > planeAspect) {
+            repeatX = 1;
+            repeatY = texAspect / planeAspect;
+            offsetX = 0;
+            offsetY = (1 - repeatY) / 2;
+          } else {
+            repeatX = planeAspect / texAspect;
+            repeatY = 1;
+            offsetX = (1 - repeatX) / 2;
+            offsetY = 0;
+          }
+          texture.wrapS = THREE.ClampToEdgeWrapping;
+          texture.wrapT = THREE.ClampToEdgeWrapping;
+          texture.repeat.set(repeatX, repeatY);
+          texture.offset.set(offsetX, offsetY);
+        };
+
         mediaFiles.forEach((media, index) => {
-          const geometry = new THREE.PlaneGeometry(2.5, 1.7);
+          const geometry = new THREE.PlaneGeometry(planeW, planeH);
           let material;
           let videoElement = null;
 
@@ -198,6 +263,12 @@ export function useThreeJS(onMediaClick) {
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.magFilter = THREE.LinearFilter;
 
+            registerListener(video, 'loadedmetadata', () => {
+              if (video.videoWidth && video.videoHeight) {
+                applyContainToTexture(videoTexture, video.videoWidth, video.videoHeight);
+              }
+            });
+
             material = new THREE.MeshBasicMaterial({
               map: videoTexture,
               side: THREE.DoubleSide
@@ -205,7 +276,12 @@ export function useThreeJS(onMediaClick) {
           } else {
             const texture = textureLoader.load(
               media.src,
-              undefined,
+              (tex) => {
+                const img = tex.image;
+                if (img && img.width && img.height) {
+                  applyContainToTexture(tex, img.width, img.height);
+                }
+              },
               undefined,
               () => {}
             );

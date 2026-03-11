@@ -3,7 +3,8 @@
 ## The Problem
 Your videos from `https://media.stellamathioudakis.com` are blocked by CORS when loading from `localhost:3001`.
 
-## Solution: Configure CORS in Cloudflare R2 (Takes 2 minutes)
+## Critical: Use Array Format!
+Cloudflare R2 **requires** the CORS policy to be a JSON **array** `[{...}]`, not a single object `{...}`. If you pasted just the object, it won't work.
 
 ### Step 1: Open Cloudflare Dashboard
 1. Go to: https://dash.cloudflare.com
@@ -19,7 +20,7 @@ Your videos from `https://media.stellamathioudakis.com` are blocked by CORS when
 3. Click **Edit CORS Policy** or **Configure CORS**
 
 ### Step 4: Add CORS Configuration
-Copy and paste this **exact** JSON:
+Copy and paste this **exact** JSON. **The outer `[ ]` brackets are required**—R2 expects an array of rules:
 
 ```json
 [
@@ -33,7 +34,9 @@ Copy and paste this **exact** JSON:
 ]
 ```
 
-**Important:** Make sure the JSON is valid (no extra commas, proper brackets).
+**Important:** 
+- The policy must be wrapped in `[ ]` (array). A bare `{ }` object will not work.
+- Make sure the JSON is valid (no extra commas, proper brackets).
 
 ### Step 5: Save
 1. Click **Save** or **Update CORS Policy**

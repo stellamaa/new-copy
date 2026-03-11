@@ -47,7 +47,9 @@ export function useMusicPlayer() {
           pauseAllExcept(audio, btn);
           audio.play().then(() => {
             btn.textContent = 'pause';
-          }).catch(() => {});
+          }).catch((err) => {
+            console.warn('Audio play failed:', audio.src || audio.querySelector?.('source')?.src, err);
+          });
         } else {
           audio.pause();
           btn.textContent = 'play';

@@ -188,10 +188,42 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
       return group;
     }
 
+    const planeW = 2;
+    const planeH = 2.5;
+    const planeAspect = planeW / planeH;
+
+    const applyContainToTexture = (texture, width, height) => {
+      const texAspect = width / height;
+      let repeatX = 1;
+      let repeatY = 1;
+      let offsetX = 0;
+      let offsetY = 0;
+      if (texAspect > planeAspect) {
+        repeatX = 1;
+        repeatY = texAspect / planeAspect;
+        offsetX = 0;
+        offsetY = (1 - repeatY) / 2;
+      } else {
+        repeatX = planeAspect / texAspect;
+        repeatY = 1;
+        offsetX = (1 - repeatX) / 2;
+        offsetY = 0;
+      }
+      texture.wrapS = THREE.ClampToEdgeWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      texture.repeat.set(repeatX, repeatY);
+      texture.offset.set(offsetX, offsetY);
+    };
+
     function createImagePreview(group, media) {
-      const geometry = new THREE.PlaneGeometry(2, 2.5);
+      const geometry = new THREE.PlaneGeometry(planeW, planeH);
       const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load(media.src);
+      const texture = textureLoader.load(media.src, (tex) => {
+        const img = tex.image;
+        if (img && img.width && img.height) {
+          applyContainToTexture(tex, img.width, img.height);
+        }
+      });
       
       const material = new THREE.MeshBasicMaterial({ 
         map: texture,
@@ -204,7 +236,7 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
     }
 
     function createVideoPreview(group, media) {
-      const geometry = new THREE.PlaneGeometry(2, 2.5);
+      const geometry = new THREE.PlaneGeometry(planeW, planeH);
       
       // Get video source - handle both local paths and full URLs
       const videoSrc = typeof media.src === 'string' && media.src.startsWith('http')
@@ -237,6 +269,12 @@ export function useThreeJSAlternative(containerRef, onMediaClick, isGridMode) {
       const videoTexture = new THREE.VideoTexture(video);
       videoTexture.minFilter = THREE.LinearFilter;
       videoTexture.magFilter = THREE.LinearFilter;
+
+      video.addEventListener('loadedmetadata', () => {
+        if (video.videoWidth && video.videoHeight) {
+          applyContainToTexture(videoTexture, video.videoWidth, video.videoHeight);
+        }
+      });
       
       const material = new THREE.MeshBasicMaterial({ 
         map: videoTexture,
