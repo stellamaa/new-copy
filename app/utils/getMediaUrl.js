@@ -9,6 +9,7 @@ const R2_BASE_URL = process.env.NEXT_PUBLIC_R2_URL || 'https://media.stellamathi
 // Files that should be loaded from R2 (files over 25MB)
 // Note: "Up and onward master.wav" may be stored as "Upandonwardmaster.wav" on R2
 const R2_FILES = [
+  'AshleySavillevideo.mov',
   'stellavideo.mov',
   'Upandonwardmaster.wav',
   'Up and onward master.wav',

@@ -11,6 +11,7 @@
     "upload-r2": "node scripts/upload-to-r2.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1007.0",
     "next": "14.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -21,10 +22,3 @@
     "eslint-config-next": "14.2.5"
   }
 }
-
-
-
-
-
-
-

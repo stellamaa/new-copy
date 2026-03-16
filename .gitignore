@@ -42,6 +42,7 @@ next-env.d.ts
 
 # Large media files (use Git LFS or external storage)
 # Files over 25MB for Cloudflare Pages deployment
+public/assets/AshleySavillevideo.mov
 public/assets/stellaoldsite.mov
 public/assets/stellavideo.mov
 public/assets/Up and onward master.wav

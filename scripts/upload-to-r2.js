@@ -40,6 +40,7 @@ const s3Client = new S3Client({
 
 // Files to upload (all files over 25MB)
 const filesToUpload = [
+  'public/assets/AshleySavillevideo.mov',
   'public/assets/stellavideo.mov',
   'public/assets/Up and onward master.wav',
   'public/assets/GenderLondon.mp4',
