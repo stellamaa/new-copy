@@ -20,6 +20,7 @@ const R2_FILES = [
   'nynspacevideo.mp4',
   'sculpture.mov',
   'jeromevideo.mp4',
+  'WellVideo.mov',
 ];
 
 export function getMediaUrl(localPath) {
