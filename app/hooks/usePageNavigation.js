@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { createEventListenerManager } from '../utils/eventListeners';
 
 export function usePageNavigation() {
@@ -8,7 +8,7 @@ export function usePageNavigation() {
   const isArtOpenRef = useRef(false);
   const currentPageRef = useRef('landing');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
 
     const { registerListener, cleanup } = createEventListenerManager();
@@ -133,49 +133,21 @@ export function usePageNavigation() {
       goToLanding();
     }
 
-    // Set up navigation handlers
-    const navName = document.getElementById('nav-name');
-    const navDevelopment = document.getElementById('nav-development');
-    const navArt = document.getElementById('nav-art');
-    const navAbout = document.getElementById('nav-about');
-    const closeAbout = document.getElementById('close-about');
-    const closeArt = document.getElementById('close-art');
-    const closeDevelopment = document.getElementById('close-development');
+    // Use event delegation with capture phase to ensure clicks work (handles overlays blocking)
+    const handleClick = (e) => {
+      const target = e.target?.closest?.('#nav-name, #nav-development, #nav-art, #nav-about, #close-about, #close-art, #close-development');
+      if (!target) return;
 
-    const handleNavNameClick = (e) => {
-      e.preventDefault();
-      goToLanding();
-    };
-
-    const handleNavDevelopmentClick = (e) => {
-      e.preventDefault();
-      goToDevelopment();
-    };
-
-    const handleNavArtClick = (e) => {
-      e.preventDefault();
-      toggleArt();
-    };
-
-    const handleNavAboutClick = (e) => {
-      e.preventDefault();
-      toggleAbout();
-    };
-
-    const handleCloseAboutClick = (e) => {
-      e.preventDefault();
-      closeAboutPage();
-    };
-
-    const handleCloseArtClick = (e) => {
-      e.preventDefault();
-      closeArtPage();
-    };
-
-    const handleCloseDevelopmentClick = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      closeDevelopmentPage();
+
+      if (target.id === 'nav-name') goToLanding();
+      else if (target.id === 'nav-development') goToDevelopment();
+      else if (target.id === 'nav-art') toggleArt();
+      else if (target.id === 'nav-about') toggleAbout();
+      else if (target.id === 'close-about') closeAboutPage();
+      else if (target.id === 'close-art') closeArtPage();
+      else if (target.id === 'close-development') closeDevelopmentPage();
     };
 
     const handleKeyDown = (e) => {
@@ -188,13 +160,10 @@ export function usePageNavigation() {
       }
     };
 
-    if (navName) registerListener(navName, 'click', handleNavNameClick);
-    if (navDevelopment) registerListener(navDevelopment, 'click', handleNavDevelopmentClick);
-    if (navArt) registerListener(navArt, 'click', handleNavArtClick);
-    if (navAbout) registerListener(navAbout, 'click', handleNavAboutClick);
-    if (closeAbout) registerListener(closeAbout, 'click', handleCloseAboutClick);
-    if (closeArt) registerListener(closeArt, 'click', handleCloseArtClick);
-    if (closeDevelopment) registerListener(closeDevelopment, 'click', handleCloseDevelopmentClick);
+    const appRoot = document.getElementById('app-root');
+    if (appRoot) {
+      registerListener(appRoot, 'click', handleClick);
+    }
     registerListener(document, 'keydown', handleKeyDown);
 
     // Initialize landing page - ensure it's visible by default

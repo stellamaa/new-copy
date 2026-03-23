@@ -10,18 +10,16 @@ export default function Navigation() {
 
     const { registerListener, registerTimeout, registerCleanup, cleanup } = createEventListenerManager();
 
-    const navItems = [
-      { id: 'nav-development', text: 'code + design' },
-      { id: 'nav-art', text: 'art' },
-      { id: 'nav-about', text: 'about' }
-    ];
+    // Apply rotation to all nav items (nav-item and nav-about)
+    const elements = document.querySelectorAll('.nav-item, .nav-about');
 
-    navItems.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (!element) return;
+    elements.forEach((element) => {
+      const text = element.getAttribute('data-text') || element.textContent?.trim() || '';
+      if (!text) return;
+
       element.innerHTML = '';
 
-      const chars = item.text.split('').map((char) => {
+      const chars = text.split('').map((char) => {
         const span = document.createElement('span');
         span.textContent = char;
         span.style.display = 'inline-block';
@@ -33,7 +31,7 @@ export default function Navigation() {
       const handleMouseEnter = () => {
         chars.forEach((span) => {
           const originalChar = span.textContent?.toLowerCase() || '';
-          const upsideDownChar = upsideDownChars[originalChar] || originalChar;
+          const upsideDownChar = upsideDownChars[originalChar] ?? originalChar;
           span.textContent = upsideDownChar;
           span.style.transform = 'rotate(180deg)';
         });
@@ -43,7 +41,7 @@ export default function Navigation() {
         chars.forEach((span, index) => {
           span.style.transform = 'rotate(0deg)';
           const restore = window.setTimeout(() => {
-            span.textContent = item.text[index];
+            span.textContent = text[index];
           }, 300);
           registerTimeout(restore);
         });
@@ -62,11 +60,11 @@ export default function Navigation() {
 
   return (
     <nav className="nav">
-      <a href="#" className="nav-item" id="nav-development" data-text="code + design">
-        code + design
+      <a href="#" className="nav-item" id="nav-development" data-text="code + design,">
+        code + design,
       </a>
-      <a href="#" className="nav-item" id="nav-art" data-text="art">
-        art
+      <a href="#" className="nav-item" id="nav-art" data-text="art,">
+        art,
       </a>
       <a href="#" className="nav-about" id="nav-about" data-text="about">
         about
