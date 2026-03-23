@@ -10,7 +10,6 @@ import DevelopmentPage from './components/DevelopmentPageAlternative';
 import AboutPage from './components/AboutPage';
 import ArtPage from './components/ArtPage';
 import FullscreenModal from './components/FullscreenModal';
-import RegistrationMarks from './components/RegistrationMarks';
 
 export default function HomePage() {
   usePageNavigation();
@@ -20,7 +19,7 @@ export default function HomePage() {
 
   return (
     <div id="app-root" className="invertable">
-      <RegistrationMarks />
+     
       <div className="site-bio">
         <span>Stella Mathioudakis</span>
         <span> design focused frontend developer / sound artist</span>
