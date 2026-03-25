@@ -66,7 +66,7 @@ export default function Navigation() {
       <a href="#" className="nav-item" id="nav-art" data-text="art,">
         art,
       </a>
-      <a href="#" className="nav-about" id="nav-about" data-text="about">
+      <a href="#" className="nav-about" id="nav-about" data-text="information">
         information
       </a>
     </nav>
