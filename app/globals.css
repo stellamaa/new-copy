@@ -1564,15 +1564,17 @@ body {
         transform: translateY(0) !important;
     }
 
-    /* Close Buttons - bottom-left on mobile; raised for Chrome (dynamic viewport) */
+    /* Close Buttons - align with theme toggle on mobile */
     .close-about,
     .close-art,
     .close-development,
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 24px) !important;
-        left: 12px !important;
+        /* Match #theme-toggle's bottom inset, and sit just to its left */
+        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
+        right: calc(env(safe-area-inset-right) + 3.5rem) !important;
+        left: auto !important;
         z-index: 2147483647 !important;
         font-size: 1.7rem !important;
         font-weight: lighter !important;
@@ -1591,7 +1593,6 @@ body {
         padding: 8px 12px !important;
         border: none !important;
         top: auto !important;
-        right: auto !important;
         transform: translateZ(0) !important;
         -webkit-transform: translateZ(0) !important;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
@@ -1742,8 +1743,9 @@ body {
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 24px) !important;
-        left: 12px !important;
+        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
+        left: calc(env(safe-area-inset-left) + 3.5rem) !important;
+        left: auto !important;
         z-index: 2147483647 !important;
         font-size: 1.2rem !important;
         font-family: inherit !important;
@@ -1761,7 +1763,6 @@ body {
         padding: 8px 12px !important;
         border: none !important;
         top: auto !important;
-        right: auto !important;
         transform: translateZ(0) !important;
         -webkit-transform: translateZ(0) !important;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
