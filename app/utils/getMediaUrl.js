@@ -21,6 +21,7 @@ const R2_FILES = [
   'sculpture.mov',
   'jeromevideo.mp4',
   'WellVideo.mov',
+  '2023.mov',
 ];
 
 export function getMediaUrl(localPath) {
