@@ -4,15 +4,16 @@
 
 These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 
-1. ✅ `AshleySavillevideo.mov` - Used in mediaFiles.js (Ashley Saville project)
-2. ✅ `rielavideo.mp4` (53MB) - Used in mediaFiles.js
-3. ✅ `fionavideo.mp4` (40MB) - Used in mediaFiles.js  
-4. ✅ `nynspacevideo.mp4` (28MB) - Used in mediaFiles.js
-5. ✅ `stellaoldvideo.mp4` (55MB) - Used in mediaFiles.js
-6. ✅ `sculpture.mov` (26MB) - Used in ArtPage.js
-7. ✅ `GenderLondon.mp4` (63MB) - Used in ArtPage.js
-8. ✅ `Up and onward master.wav` (86MB) - Used in ArtPage.js
-9. ⚠️ `stellavideo.mov` (86MB) - Check if used in codebase
+1. ✅ `AshleySaville.mov` - Used in mediaFiles.js (Ashley Saville project)
+2. ✅ `batu-video.mov` (~21MB) - Used in mediaFiles.js (Batu project)
+3. ✅ `rielavideo.mp4` (53MB) - Used in mediaFiles.js
+4. ✅ `fionavideo.mp4` (40MB) - Used in mediaFiles.js  
+5. ✅ `nynspacevideo.mp4` (28MB) - Used in mediaFiles.js
+6. ✅ `stellaoldvideo.mp4` (55MB) - Used in mediaFiles.js
+7. ✅ `sculpture.mov` (26MB) - Used in ArtPage.js
+8. ✅ `GenderLondon.mp4` (63MB) - Used in ArtPage.js
+9. ✅ `Up and onward master.wav` (86MB) - Used in ArtPage.js
+10. ⚠️ `stellavideo.mov` (86MB) - Check if used in codebase
 
 ## R2 Bucket URL
 **Public URL**: `https://media.stellamathioudakis.com`
@@ -33,7 +34,8 @@ These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 ## Verification
 
 After uploading, verify files are accessible:
-- `https://media.stellamathioudakis.com/AshleySavillevideo.mov`
+- `https://media.stellamathioudakis.com/AshleySaville.mov`
+- `https://media.stellamathioudakis.com/batu-video.mov`
 - `https://media.stellamathioudakis.com/rielavideo.mp4`
 - `https://media.stellamathioudakis.com/fionavideo.mp4`
 - `https://media.stellamathioudakis.com/nynspacevideo.mp4`

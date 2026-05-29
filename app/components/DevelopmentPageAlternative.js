@@ -87,12 +87,12 @@ export default function DevelopmentPageAlternative() {
     }
   }, [isGridMode]);
 
-  // Typing animation for "recent projects" text
+  // Typing animation for "selected projects" text
   useEffect(() => {
     if (isGridMode) {
       setDisplayedText('');
       let currentIndex = 0;
-      const text = 'recent projects';
+      const text = 'selected projects';
       const typingInterval = setInterval(() => {
         if (currentIndex < text.length) {
           setDisplayedText(text.slice(0, currentIndex + 1));
@@ -121,7 +121,7 @@ export default function DevelopmentPageAlternative() {
         ref={threeContainerRef} 
         className={(!isGridMode && !isMobile) ? 'active' : ''}
       >      </div>
-      <div className="recent-projects-title">{isMounted && isMobile ? displayedText : 'recent projects'}</div>
+      <div className="recent-projects-title">{isMounted && isMobile ? displayedText : 'selected projects'}</div>
       <div 
         className={`development-grid ${isGridMode ? 'active' : ''}`} 
         id="development-grid"

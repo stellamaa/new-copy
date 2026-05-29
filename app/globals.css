@@ -1493,7 +1493,7 @@ body {
         opacity: 1 !important;
     }
 
-    /* Recent Projects Title */
+    /* Selected Projects Title */
     .recent-projects-title {
         position: fixed;
         top: 0px;
