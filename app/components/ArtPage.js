@@ -30,6 +30,14 @@ export default function ArtPage() {
             <li>Music Sync Clients include Nanushka, Zara, WEB SERIES SKMY. </li>
           </ul>
         </div>
+
+        <div className="services-section">
+          <h3>
+              POETRY
+          </h3>
+          <a href="https://substack.com/@stellamathioudakis" target="_blank" rel="noopener noreferrer">
+Substack          </a>
+        </div>
         <div className="services-section">
           <h3>Selected Exhibitions and Installations</h3>
           <table className="list-table">
@@ -74,6 +82,8 @@ export default function ArtPage() {
             </tbody>
           </table>
         </div>
+
+    
 
         <audio id="gender-audio" preload="auto" crossOrigin="anonymous">
           <source src={getMediaUrl('/assets/Upandonwardmaster.wav')} type="audio/wav" />
