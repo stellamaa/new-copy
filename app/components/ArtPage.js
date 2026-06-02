@@ -33,7 +33,7 @@ export default function ArtPage() {
 
         <div className="services-section">
           <h3>
-              POETRY
+             POETRY / WORDS
           </h3>
           <a href="https://substack.com/@stellamathioudakis" target="_blank" rel="noopener noreferrer">
 Substack          </a>
