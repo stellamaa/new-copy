@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import CloseButton from './CloseButton';
 import { createEventListenerManager } from '../utils/eventListeners';
 
 export default function FullscreenModal() {
@@ -66,9 +67,7 @@ export default function FullscreenModal() {
 
   return (
     <div id="fullscreen-modal" className="fullscreen-modal">
-      <button className="close-modal" id="close-modal">
-        ×
-      </button>
+      <CloseButton id="close-modal" className="close-modal" ariaLabel="Close fullscreen view" />
       <img id="fullscreen-image" className="fullscreen-image" alt="Fullscreen view" />
     </div>
   );

@@ -1,11 +1,11 @@
 'use client';
 
+import CloseButton from './CloseButton';
+
 export default function AboutPage() {
   return (
     <div className="page about-page" id="about-page">
-      <button className="close-about" id="close-about">
-        ×
-      </button>
+      <CloseButton id="close-about" className="close-about" ariaLabel="Close about page" />
       <div className="about-content">
         <div className="about-text">
           <p>I work between design, code, and sound <br />

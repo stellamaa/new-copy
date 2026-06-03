@@ -314,22 +314,51 @@ body {
     opacity: 0 !important;
 }
 
-.close-development, .close-modal {
+.close-about,
+.close-art,
+.close-development,
+.close-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.close-development,
+.close-modal {
     position: absolute;
     top: 0px;
     right: 10px;
-    background: none;
-    border: none;
-    color: #414141;
-    font-size: 30px;
-    font-weight: lighter;
-    cursor: pointer;
     z-index: 2001;
-    transition: opacity 0.3s ease, color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.dark .close-development, .dark .close-modal { color: #ffffff; }
-.close-development:hover, .close-modal:hover { opacity: 0.7; }
+.close-icon-img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    filter: none;
+    transition: filter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dark .close-about .close-icon-img,
+.dark .close-art .close-icon-img,
+.dark .close-development .close-icon-img,
+.dark .close-modal .close-icon-img {
+    filter: invert(1);
+}
+
+.close-about:hover,
+.close-art:hover,
+.close-development:hover,
+.close-modal:hover {
+    opacity: 0.7;
+}
 
 /* Grid Toggle Button */
 .grid-toggle {
@@ -747,23 +776,34 @@ body {
     text-decoration: underline;
 }
 
+.poetry-section h3,
+.poetry-section .substack-link {
+    color: #414141;
+    transition: color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dark .poetry-section h3,
+.dark .poetry-section .substack-link {
+    color: #ffffff;
+}
+
+.poetry-section .substack-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.poetry-section .substack-link:hover {
+    text-decoration: underline;
+}
+
 .close-art {
     position: absolute;
     top: 0px;
     right: 10px;
-    background: none;
-    border: none;
-    color: #5f5f5f;
-    font-size: 30px;
-    font-weight: light;
-    cursor: pointer;
     z-index: 2001;
-    transition: opacity 0.3s ease, color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
-
-
-.close-art:hover { opacity: 0.7; }
 
 .list-table {
     width: 90%;
@@ -1009,18 +1049,7 @@ body {
     position: absolute;
     top: 0px;
     right: 10px;
-    background: none;
-    border: none;
-    color: #5f5f5f;
-    font-size: 30px;
-    font-weight: lighter;
-    cursor: pointer;
     z-index: 2001;
-    transition: opacity 0.9s ease, color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.close-about:hover {
-    opacity: 0.6;
 }
 
 
@@ -1090,13 +1119,9 @@ body {
 .dark .development-page { background-color: #4a4a4a; }
 .dark .about-page { background-color: #4a4a4a; }
 .dark .about-page p, .dark .about-page li, .dark .about-page h3{ color: #ffffff; }
-.dark .close-about { color: #ffffff;}
-.dark .close-about:hover { opacity: 0.7; }
 .dark .art-page { background-color: #4a4a4a; }
 .dark .art-page p, .dark .art-page li, .dark .art-page h3, .dark .list-table td{ color: #ffffff; }
-.dark .close-art { color: #ffffff;}
 .dark .grid-item-title { color: #ffffff; }
-.dark .close-art:hover { opacity: 0.7; }
 .dark .nav-name, .dark .nav-item, .dark .nav-about { color: #ffffffd0; }
 .dark .email-link { color: #ffffff; text-decoration: none !important; }
 .dark #three-container { background-color: transparent; }
@@ -1204,11 +1229,6 @@ body {
    ======================================== */
 @media (max-width: 768px) {
     /* Site Bio */
-
-.close-about, .close-art ,.close-modal{
-    font-size: 0.9rem !important;
-    padding: 4px 10px !important;
-}
 
     .site-bio {
         position: fixed;
@@ -1564,48 +1584,70 @@ body {
         transform: translateY(0) !important;
     }
 
-    /* Close Buttons - align with theme toggle on mobile */
+    /* Hide footer and bio when overlay pages open — avoids covering bottom-left close */
+    #app-root:has(.art-page.active) .footer,
+    #app-root:has(.about-page.active) .footer,
+    #app-root:has(.development-page.active) .footer {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    #app-root:has(.art-page.active) .site-bio,
+    #app-root:has(.about-page.active) .site-bio,
+    #app-root:has(.development-page.active) .site-bio {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* Close button — bottom-left, large tap target, always on top */
     .close-about,
     .close-art,
     .close-development,
     .close-modal {
         all: unset !important;
         position: fixed !important;
-        /* Match #theme-toggle's bottom inset, and sit just to its left */
-        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
-        right: calc(env(safe-area-inset-right) + 3.5rem) !important;
-        left: auto !important;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
+        left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
+        right: auto !important;
+        top: auto !important;
         z-index: 2147483647 !important;
-        font-size: 1.7rem !important;
-        font-weight: lighter !important;
-        font-family: inherit !important;
-        color: #626262 !important;
-        cursor: pointer !important;
-        line-height: 1 !important;
-        display: block !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
         visibility: visible !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         background: transparent !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
         width: auto !important;
         height: auto !important;
         margin: 0 !important;
-        padding: 8px 12px !important;
+        padding: 6px !important;
         border: none !important;
-        top: auto !important;
+        box-sizing: border-box !important;
+        cursor: pointer !important;
         transform: translateZ(0) !important;
         -webkit-transform: translateZ(0) !important;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.15) !important;
         isolation: isolate !important;
     }
 
-    .dark .close-about,
-    .dark .close-art,
-    .dark .close-development,
-    .dark .close-modal {
-        color: #ffffff !important;
+    .close-about .close-icon-img,
+    .close-art .close-icon-img,
+    .close-development .close-icon-img,
+    .close-modal .close-icon-img {
+        width: 26px !important;
+        height: 26px !important;
     }
-   
+
+    .art-page .about-content,
+    .about-page .about-content {
+        padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 60px) !important;
+    }
+
     /* Theme Toggle */
     #theme-toggle {
         position: fixed !important;
@@ -1719,8 +1761,13 @@ body {
         padding: 50px 15px 15px;
     }
     .services-section {
-        margin-bottom: 10px !important;
+        margin-bottom: 40px !important;
+        margin-top: 10px !important;
     }
+
+  .art-page h3 {
+    margin-bottom: 5px !important;
+  }
 
     .main-image-container {
         height: 250px;
@@ -1736,44 +1783,6 @@ body {
     }
     .contact-section h3 {
         margin-bottom: 10px !important;
-    }
-    .close-about,
-    .close-art,
-    .close-development,
-    .close-modal {
-        all: unset !important;
-        position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom) + 10px) !important;
-        left: calc(env(safe-area-inset-left) + 3.5rem) !important;
-        left: auto !important;
-        z-index: 2147483647 !important;
-        font-size: 1.2rem !important;
-        font-family: inherit !important;
-        color: #414141 !important;
-        cursor: pointer !important;
-        line-height: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        background: transparent !important;
-        width: auto !important;
-        height: auto !important;
-        margin: 0 !important;
-        padding: 8px 12px !important;
-        border: none !important;
-        top: auto !important;
-        transform: translateZ(0) !important;
-        -webkit-transform: translateZ(0) !important;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
-        isolation: isolate !important;
-    }
-
-    .dark .close-about,
-    .dark .close-art,
-    .dark .close-development,
-    .dark .close-modal {
-        color: #ffffff !important;
     }
 
     /* Pages */

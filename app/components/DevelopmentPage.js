@@ -6,6 +6,7 @@ import { useThreeJS } from '../hooks/useThreeJS';
 import { useDevelopmentText } from '../hooks/useDevelopmentText';
 import { useDevelopmentGrid } from '../hooks/useDevelopmentGrid';
 import FullscreenModal from './FullscreenModal';
+import CloseButton from './CloseButton';
 
 export default function DevelopmentPage() {
   const handleMediaClick = (media) => {
@@ -24,9 +25,7 @@ export default function DevelopmentPage() {
 
   return (
     <div className="page development-page" id="development-page">
-      <button className="close-development" id="close-development">
-        ×
-      </button>
+      <CloseButton id="close-development" className="close-development" ariaLabel="Close development page" />
       <div id="three-container"></div>
 
       <div className="development-grid" id="development-grid">
