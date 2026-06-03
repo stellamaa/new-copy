@@ -5,7 +5,6 @@ import { mediaFiles } from '../constants/mediaFiles';
 import { useThreeJSAlternative } from '../hooks/useThreeJSAlternative';
 import { useDevelopmentText } from '../hooks/useDevelopmentText';
 import FullscreenModal from './FullscreenModal';
-import CloseButton from './CloseButton';
 
 export default function DevelopmentPageAlternative() {
   const [isGridMode, setIsGridMode] = useState(true); // Grid is default
@@ -109,7 +108,7 @@ export default function DevelopmentPageAlternative() {
 
   return (
     <div className="page development-page" id="development-page">
-      <CloseButton id="close-development" className="close-development" ariaLabel="Close development page" />
+      <div className="page-slide">
       {!isMobile && (
         <button className="grid-toggle" id="grid-toggle" onClick={toggleGridMode}>
           {isGridMode ? '3D' : 'grid'}
@@ -202,6 +201,7 @@ export default function DevelopmentPageAlternative() {
         })}
       </div>
       <FullscreenModal />
+      </div>
     </div>
   );
 }

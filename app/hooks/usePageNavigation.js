@@ -13,6 +13,15 @@ export function usePageNavigation() {
 
     const { registerListener, cleanup } = createEventListenerManager();
 
+    function setOverlayCloseState(page) {
+      const appRoot = document.getElementById('app-root');
+      if (!appRoot) return;
+      appRoot.classList.remove('overlay-development', 'overlay-about', 'overlay-art');
+      if (page === 'development') appRoot.classList.add('overlay-development');
+      if (page === 'about') appRoot.classList.add('overlay-about');
+      if (page === 'art') appRoot.classList.add('overlay-art');
+    }
+
     function goToLanding() {
       const landingPage = document.getElementById('landing-page');
       const developmentPage = document.getElementById('development-page');
@@ -20,6 +29,7 @@ export function usePageNavigation() {
       const artPage = document.getElementById('art-page');
       const nav = document.querySelector('.nav');
 
+      setOverlayCloseState(null);
       developmentPage?.classList.remove('active');
       aboutPage?.classList.remove('active');
       artPage?.classList.remove('active');
@@ -63,6 +73,7 @@ export function usePageNavigation() {
         landingPage.classList.add('hidden');
       }
       developmentPage?.classList.add('active');
+      setOverlayCloseState('development');
       currentPageRef.current = 'development';
       
       // Trigger Three.js initialization
@@ -85,6 +96,7 @@ export function usePageNavigation() {
         // Force reflow to ensure transition works
         artPage.offsetHeight;
         artPage.classList.add('active');
+        setOverlayCloseState('art');
         isArtOpenRef.current = true;
         if (nav) {
           nav.style.display = 'none';
@@ -106,6 +118,7 @@ export function usePageNavigation() {
         // Force reflow to ensure transition works
         aboutPage.offsetHeight;
         aboutPage.classList.add('active');
+        setOverlayCloseState('about');
         isAboutOpenRef.current = true;
         if (nav) {
           nav.style.display = 'none';

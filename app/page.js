@@ -10,6 +10,7 @@ import DevelopmentPage from './components/DevelopmentPageAlternative';
 import AboutPage from './components/AboutPage';
 import ArtPage from './components/ArtPage';
 import FullscreenModal from './components/FullscreenModal';
+import CloseButton from './components/CloseButton';
 
 export default function HomePage() {
   usePageNavigation();
@@ -37,6 +38,10 @@ export default function HomePage() {
       <DevelopmentPage />
       <AboutPage />
       <ArtPage />
+
+      <CloseButton id="close-development" className="close-development page-overlay-close" ariaLabel="Close development page" />
+      <CloseButton id="close-about" className="close-about page-overlay-close" ariaLabel="Close about page" />
+      <CloseButton id="close-art" className="close-art page-overlay-close" ariaLabel="Close art page" />
 
       <footer className="footer">
         <a href="mailto:stellamathioudakisart@gmail.com" className="email-link" id="email-link">

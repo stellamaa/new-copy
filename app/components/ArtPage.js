@@ -1,12 +1,10 @@
 'use client';
 
 import { getMediaUrl } from '../utils/getMediaUrl';
-import CloseButton from './CloseButton';
-
 export default function ArtPage() {
   return (
     <div className="page art-page" id="art-page">
-      <CloseButton id="close-art" className="close-art" ariaLabel="Close art page" />
+      <div className="page-slide">
       <div className="about-content">
         <div className="services-section">
           <h3>Music</h3>
@@ -30,17 +28,6 @@ export default function ArtPage() {
           </ul>
         </div>
 
-        <div className="services-section poetry-section">
-          <h3>POETRY / WORDS</h3>
-          <a
-            className="substack-link"
-            href="https://substack.com/@stellamathioudakis"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Substack
-          </a>
-        </div>
         <div className="services-section">
           <h3>Selected Exhibitions and Installations</h3>
           <table className="list-table">
@@ -121,6 +108,7 @@ export default function ArtPage() {
         <div className="media-preview" id="flaw-media-preview">
           <img className="preview-image" id="flaw-image" src="/assets/FLAW.jpg" alt="FLAW" />
         </div>
+      </div>
       </div>
     </div>
   );

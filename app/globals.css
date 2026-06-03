@@ -259,17 +259,8 @@ body {
 
 /* Development Page */
 .development-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
     background-color: #fff;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(100%);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 2000;
+    transition: background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Ensure development page is always on top when active */
@@ -277,11 +268,6 @@ body {
     z-index: 2000 !important;
 }
 
-.development-page.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-}
 
 
 .development-text {
@@ -325,10 +311,18 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+    color: #000;
     transition: opacity 0.3s ease;
 }
 
-.close-development,
+.dark .close-about,
+.dark .close-art,
+.dark .close-development,
+.dark .close-modal {
+    color: #fff;
+}
+
+.close-development:not(.page-overlay-close),
 .close-modal {
     position: absolute;
     top: 0px;
@@ -336,21 +330,12 @@ body {
     z-index: 2001;
 }
 
-.close-icon-img {
+.close-icon-svg {
+    display: block;
     width: 26px;
     height: 26px;
-    object-fit: contain;
-    display: block;
     pointer-events: none;
-    filter: none;
-    transition: filter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.dark .close-about .close-icon-img,
-.dark .close-art .close-icon-img,
-.dark .close-development .close-icon-img,
-.dark .close-modal .close-icon-img {
-    filter: invert(1);
+    flex-shrink: 0;
 }
 
 .close-about:hover,
@@ -611,19 +596,78 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: translateY(100%);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                visibility 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 2000;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .page.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
     pointer-events: auto;
+}
+
+/* Slide animation on inner wrapper so fixed close buttons work on iOS */
+.page-slide {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(100%);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.page.active .page-slide {
+    transform: translateY(0);
+}
+
+/* Overlay close buttons live outside transformed pages (app root) */
+.page-overlay-close {
+    display: none;
+    position: fixed;
+    z-index: 2147483647;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    color: #000;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.15);
+}
+
+.dark .page-overlay-close {
+    color: #fff;
+}
+
+#app-root.overlay-development #close-development.page-overlay-close,
+#app-root.overlay-about #close-about.page-overlay-close,
+#app-root.overlay-art #close-art.page-overlay-close,
+#app-root:has(.development-page.active) #close-development.page-overlay-close,
+#app-root:has(.about-page.active) #close-about.page-overlay-close,
+#app-root:has(.art-page.active) #close-art.page-overlay-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    top: 8px;
+    right: 10px;
+    bottom: auto;
+    left: auto;
 }
 
 /* Landing Page */
@@ -719,51 +763,27 @@ body {
 /* About Page */
 .about-page {
     background-color: #fff;
+    transition: background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-page .page-slide {
     padding: 10px 10px 40px;
     display: flex;
     align-items: start;
     justify-content: start;
-    overflow-y: auto;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                visibility 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: translateY(100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.about-page.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
 }
 
 /* Art Page styled same as about */
 .art-page {
     background-color: #fff;
+    transition: background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.art-page .page-slide {
     padding: 10px 10px 40px;
     display: flex;
     align-items: start;
     justify-content: start;
-    overflow-y: auto;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                visibility 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                background-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: translateY(100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.art-page.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
 }
 
 .art-page a {
@@ -776,29 +796,7 @@ body {
     text-decoration: underline;
 }
 
-.poetry-section h3,
-.poetry-section .substack-link {
-    color: #414141;
-    transition: color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.dark .poetry-section h3,
-.dark .poetry-section .substack-link {
-    color: #ffffff;
-}
-
-.poetry-section .substack-link {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 300;
-    text-decoration: none;
-}
-
-.poetry-section .substack-link:hover {
-    text-decoration: underline;
-}
-
-.close-art {
+.close-art:not(.page-overlay-close) {
     position: absolute;
     top: 0px;
     right: 10px;
@@ -1045,7 +1043,7 @@ body {
 
 
 
-.close-about {
+.close-about:not(.page-overlay-close) {
     position: absolute;
     top: 0px;
     right: 10px;
@@ -1602,28 +1600,22 @@ body {
     }
 
     /* Close button — bottom-left, large tap target, always on top */
-    .close-about,
-    .close-art,
-    .close-development,
-    .close-modal {
-        all: unset !important;
+    .page-overlay-close {
         position: fixed !important;
         bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
         left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
         right: auto !important;
         top: auto !important;
         z-index: 2147483647 !important;
-        display: flex !important;
+        display: none !important;
         align-items: center !important;
         justify-content: center !important;
         visibility: visible !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         background: transparent !important;
-        min-width: 40px !important;
-        min-height: 40px !important;
-        width: auto !important;
-        height: auto !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
         margin: 0 !important;
         padding: 6px !important;
         border: none !important;
@@ -1635,10 +1627,32 @@ body {
         isolation: isolate !important;
     }
 
-    .close-about .close-icon-img,
-    .close-art .close-icon-img,
-    .close-development .close-icon-img,
-    .close-modal .close-icon-img {
+    #app-root.overlay-development #close-development.page-overlay-close,
+    #app-root.overlay-about #close-about.page-overlay-close,
+    #app-root.overlay-art #close-art.page-overlay-close,
+    #app-root:has(.development-page.active) #close-development.page-overlay-close,
+    #app-root:has(.about-page.active) #close-about.page-overlay-close,
+    #app-root:has(.art-page.active) #close-art.page-overlay-close {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .close-modal {
+        position: fixed !important;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
+        left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
+        right: auto !important;
+        top: auto !important;
+        z-index: 2147483647 !important;
+        display: flex !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+
+    .page-overlay-close .close-icon-svg,
+    .close-modal .close-icon-svg {
         width: 26px !important;
         height: 26px !important;
     }
@@ -1717,8 +1731,8 @@ body {
         text-decoration: none !important;
     }
 
-    .about-page  {
-        padding: 10px 10px 10px 10px !important;
+    .about-page {
+        overflow: hidden !important;
     }
     
     /* Remove underline from email on mobile */
@@ -1734,8 +1748,12 @@ body {
     }
 
     .art-page {
-        padding: 10px 10px 10px 10px !important;
         overflow: hidden !important;
+    }
+
+    .art-page .page-slide,
+    .about-page .page-slide {
+        padding: 10px 10px 40px 10px !important;
     }
 
     /* Lower Music Sync text and make it same size as music text */
