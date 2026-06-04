@@ -1599,25 +1599,25 @@ body {
         pointer-events: none !important;
     }
 
-    /* Close button — bottom-left, large tap target, always on top */
+    /* Close button — bottom-left, aligned with theme toggle */
     .page-overlay-close {
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
-        left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+        left: calc(env(safe-area-inset-left, 0px) + 4px) !important;
         right: auto !important;
         top: auto !important;
         z-index: 2147483647 !important;
         display: none !important;
-        align-items: center !important;
+        align-items: flex-end !important;
         justify-content: center !important;
         visibility: visible !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         background: transparent !important;
         min-width: 44px !important;
-        min-height: 44px !important;
+        min-height: auto !important;
         margin: 0 !important;
-        padding: 6px !important;
+        padding: 4px 6px !important;
         border: none !important;
         box-sizing: border-box !important;
         cursor: pointer !important;
@@ -1641,14 +1641,16 @@ body {
 
     .close-modal {
         position: fixed !important;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 6px) !important;
-        left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+        left: calc(env(safe-area-inset-left, 0px) + 4px) !important;
         right: auto !important;
         top: auto !important;
         z-index: 2147483647 !important;
         display: flex !important;
+        align-items: flex-end !important;
         min-width: 44px !important;
-        min-height: 44px !important;
+        min-height: auto !important;
+        padding: 4px 6px !important;
     }
 
     .page-overlay-close .close-icon-svg,
