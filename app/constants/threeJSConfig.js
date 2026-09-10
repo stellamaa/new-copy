@@ -12,7 +12,9 @@ export const positions = [
   { x: -0.16, y: 0, z: 0 },
   { x: 0.4, y: 0.16, z: 0 },
   { x: -0.4, y: 0.4, z: 0 },
-  { x: 0.4, y: 0, z: 0 }
+  { x: 0.4, y: 0, z: 0 },
+  { x: 0.56, y: -0.72, z: 0 },
+  { x: -0.72, y: 0.64, z: 0 }
 ];
 
 export const rotations = [
@@ -30,7 +32,9 @@ export const rotations = [
   { x: -0.1, y: 0.05, z: 0.15 },
   { x: 0.05, y: 0.1, z: -0.1 },
   { x: -0.05, y: 0.1, z: -0.1 },
-  { x: 0.08, y: -0.08, z: 0.12 }
+  { x: 0.08, y: -0.08, z: 0.12 },
+  { x: 0.12, y: -0.06, z: 0.08 },
+  { x: -0.08, y: 0.1, z: -0.06 }
 ];
 
 export const forwardTilt = [
@@ -48,7 +52,9 @@ export const forwardTilt = [
   { hasForwardTilt: true, tiltAmount: 0.28 },
   { hasForwardTilt: false, tiltAmount: 0 },
   { hasForwardTilt: true, tiltAmount: 0.32 },
-  { hasForwardTilt: true, tiltAmount: 0.3 }
+  { hasForwardTilt: true, tiltAmount: 0.3 },
+  { hasForwardTilt: false, tiltAmount: 0 },
+  { hasForwardTilt: true, tiltAmount: 0.22 }
 ];
 
 export const tiltAttributes = [
@@ -66,7 +72,9 @@ export const tiltAttributes = [
   { scale: 0.97 },
   { scale: 1.06 },
   { scale: 0.94 },
-  { scale: 1.01 }
+  { scale: 1.01 },
+  { scale: 1.04 },
+  { scale: 0.96 }
 ];
 
 
