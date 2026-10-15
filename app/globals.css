@@ -1323,6 +1323,10 @@ body {
         top: 40% !important;
         transform: translateY(-50%) !important;
     }
+
+    .mood-button {
+        display: none;
+    }
     
     .random-image-right.expanded {
         left: auto !important;
