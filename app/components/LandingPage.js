@@ -54,7 +54,7 @@ export default function LandingPage() {
         aria-pressed={playing}
         aria-label={playing ? 'Pause mood' : 'Play mood'}
       >
-        where I am in my mind
+       [ where I am in my mind ]
       </button>
       <audio ref={audioRef} src="/assets/loop1.mp3" loop preload="none" />
       <div className="landing-content">
