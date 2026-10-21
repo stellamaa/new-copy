@@ -38,7 +38,8 @@ who value clarity, experimentation, and care.</p>
         <div className="contact-section">
           <h3>Contact:</h3>
           <p>
-            <span>E-mail:</span> <span id="email">stellamathioudakisart@gmail.com</span> 
+            <span>E-mail:</span> <span id="email"><a href="mailto:stellamathioudakisart@gmail.com">stellamathioudakisart@gmail.com</a>
+        </span> 
             <br/>
             <span>open to collaborations, commissions, and conversation.  </span>
           </p>
