@@ -23,10 +23,10 @@ export default function HomePage() {
      
       <div className="site-bio">
         <span>Stella Mathioudakis</span>
-        <span> design focused developer / sound artist</span>
-        <span>working across web, code, and sound</span>
+        <span> design focused web developer / sound artist and events coordinator</span>
+        <span>working across web, sound and events</span>
         <span>exploring how technology can feel intentional.</span>
-        <span>building digital spaces that invite reflection and</span>
+        <span>building digital and physical spaces that invite reflection and</span>
         <span>connection.</span>
         <span>based in london / open to collaborations</span> 
         <span> worldwide.</span>
