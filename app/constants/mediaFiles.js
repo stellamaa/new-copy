@@ -1,8 +1,8 @@
 import { getMediaUrl } from '../utils/getMediaUrl';
 
 export const mediaFiles = [
-  { src: getMediaUrl('/assets/biu-site.mp4'), type: 'video', url: 'https://biu-landscape.com/', title: 'Web Development for Architecture studio Biu.' },
-  { src: getMediaUrl('/assets/bc-site.mp4'), type: 'video', url: 'https://blank-co.uk/', title: 'Design support and development for film production company Blank Co. Using Next.js and Sanity' },
+  { src: getMediaUrl('/assets/biu.mov'), type: 'video', url: 'https://biu-landscape.com/', title: 'Web Development for Architecture studio Biu.' },
+  { src: getMediaUrl('/assets/bc.mov'), type: 'video', url: 'https://blank-co.uk/', title: 'Design support and development for film production company Blank Co. Using Next.js and Sanity' },
   { src: getMediaUrl('/assets/batu-video.mov'), type: 'video', url: 'http://batumusic.net/', title: 'Design and code for DJ and producer Batu, made with Next.js, Sanity, and Sender API' },
   { src: getMediaUrl('/assets/AshleySaville.mov'), type: 'video', url: 'https://ashleysaville.com' , title: 'Design and code for art gallery Ashley Saville, made with Next.js, Sanity, Shopify and ArtLogic API'},
   { src: getMediaUrl('/assets/rielavideo.mp4'), type: 'video', url: 'https://rielaspaces.com' , title: 'Website for Riela Bathhouse, made with WEBGL and JS'},

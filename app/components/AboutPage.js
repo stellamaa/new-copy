@@ -6,14 +6,16 @@ export default function AboutPage() {
       <div className="page-slide">
       <div className="about-content">
         <div className="about-text">
-          <p>Digitally,I work between design, code, and sound <br />
+          <p>I work between design, code, and sound <br />
 focusing on creating digital experiences that carry a sense of presence.  
 <br />
-Physically, I work between events, art, music, and holistic practices <br />
+my background in art, music, and holistic practices <br />
+shapes how I write and design for the web: <br />
+as something tactile, rhythmic, and emotional. <br />
 
 <br />
 I&apos;m drawn to projects that merge the poetic with the technical <br />
-websites, installations, events, collaborations that feel  
+websites, installations, collaborations that feel  
 conscious and alive. <br />
 
 currently based in London,  

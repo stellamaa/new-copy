@@ -23,18 +23,19 @@ const R2_FILES = [
   'jeromevideo.mp4',
   'WellVideo.mov',
   '2023.mov',
+  'biu.mov',
+  'bc.mov',
 ];
 
 // Only these exist in public/assets during local dev — serve locally instead of R2
 const DEV_LOCAL_FILES = new Set([
-  'AshleySaville.mov',
+ 
   'batu-video.mov',
   'rielavideo.mp4',
   'fionavideo.mp4',
   'jeromevideo.mp4',
   'nynspacevideo.mp4',
   'stellaoldvideo.mp4',
-  'GenderLondon.mp4',
   'sculpture.mov',
   'stellavideo.mov',
 ]);
