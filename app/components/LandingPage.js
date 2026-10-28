@@ -56,7 +56,7 @@ export default function LandingPage() {
       >
        [ where I am in my mind ]
       </button>
-      <audio ref={audioRef} src="/assets/loop1.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/assets/birds.mp3" loop preload="none" />
       <div className="landing-content">
         <RandomImages />
         {/* <DraggableLeaf /> */}
