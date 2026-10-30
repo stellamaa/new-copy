@@ -50,6 +50,9 @@ const filesToUpload = [
   'public/assets/fionavideo.mp4',
   'public/assets/nynspacevideo.mp4',
   'public/assets/sculpture.mov',
+  'public/assets/heavenishere.mov',
+  'public/assets/biu.mov',
+  'public/assets/bc.mov',
 ];
 
 async function uploadFile(filePath) {

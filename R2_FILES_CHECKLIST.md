@@ -14,6 +14,9 @@ These files exceed Cloudflare Pages' 25MB limit and must be hosted on R2:
 8. ✅ `GenderLondon.mp4` (63MB) - Used in ArtPage.js
 9. ✅ `Up and onward master.wav` (86MB) - Used in ArtPage.js
 10. ⚠️ `stellavideo.mov` (86MB) - Check if used in codebase
+11. ✅ `heavenishere.mov` - Used in mediaFiles.js (Heaven Is Here project)
+12. ✅ `biu.mov` - Used in mediaFiles.js (Biu project)
+13. ✅ `bc.mov` - Used in mediaFiles.js (Blank Co project)
 
 ## R2 Bucket URL
 **Public URL**: `https://media.stellamathioudakis.com`
@@ -43,6 +46,9 @@ After uploading, verify files are accessible:
 - `https://media.stellamathioudakis.com/sculpture.mov`
 - `https://media.stellamathioudakis.com/GenderLondon.mp4`
 - `https://media.stellamathioudakis.com/Up and onward master.wav`
+- `https://media.stellamathioudakis.com/heavenishere.mov`
+- `https://media.stellamathioudakis.com/biu.mov`
+- `https://media.stellamathioudakis.com/bc.mov`
 
 ## Code Status
 

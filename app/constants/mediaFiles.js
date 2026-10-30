@@ -1,6 +1,7 @@
 import { getMediaUrl } from '../utils/getMediaUrl';
 
 export const mediaFiles = [
+  { src: getMediaUrl('/assets/heavenishere.mov'), type: 'video', url: 'https://stellamaa.github.io/heavenishere/', title: 'Audio-visual instrument and meditation tool, part of Claude experiment series' },
   { src: getMediaUrl('/assets/biu.mov'), type: 'video', url: 'https://biu-landscape.com/', title: 'Web Development for Architecture studio Biu.' },
   { src: getMediaUrl('/assets/bc.mov'), type: 'video', url: 'https://blank-co.uk/', title: 'Design support and development for film production company Blank Co. Using Next.js and Sanity' },
   { src: getMediaUrl('/assets/batu-video.mov'), type: 'video', url: 'http://batumusic.net/', title: 'Design and code for DJ and producer Batu, made with Next.js, Sanity, and Sender API' },

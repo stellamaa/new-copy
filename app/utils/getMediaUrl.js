@@ -25,6 +25,7 @@ const R2_FILES = [
   '2023.mov',
   'biu.mov',
   'bc.mov',
+  'heavenishere.mov',
 ];
 
 // Only these exist in public/assets during local dev — serve locally instead of R2
