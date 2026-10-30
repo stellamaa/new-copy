@@ -51,7 +51,7 @@ export default function ArtPage() {
               </tr>
               <tr className="flaw-row">
                 <td>
-                  FLAW - Sound-art Composition 'Waves of Violence' for video installation, Truman Brewery, London (2022)
+                  FLAW - Sound-art Composition &apos;Waves of Violence&apos; for video installation, Truman Brewery, London (2022)
                   <button className="music-play-btn" id="flaw-play-btn">
                     play
                   </button>
