@@ -24,6 +24,11 @@ export default function ArtPage() {
                 Moods (2020)
               </a>
             </li>
+            <li>
+              <a href="https://stellamathioudakis.bandcamp.com/album/documentary-music" target="_blank" rel="noopener noreferrer">
+                Documentary Music (2026)
+              </a>
+            </li>
             <li>Music Sync Clients include Nanushka, Zara, WEB SERIES SKMY. </li>
           </ul>
         </div>
