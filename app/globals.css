@@ -195,8 +195,8 @@ body {
 
 .random-image-container {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 72px;
+    height: 72px;
     cursor: pointer;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
