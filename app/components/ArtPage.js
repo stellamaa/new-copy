@@ -9,9 +9,9 @@ export default function ArtPage() {
         <div className="services-section">
           <h3>Music</h3>
           <ul className="services-list">
-            <li>
-              <a href="https://mapledeathrecords.bandcamp.com/album/lp2" target="_blank" rel="noopener noreferrer">
-                LP2 (2021)
+          <li>
+              <a href="https://stellamathioudakis.bandcamp.com/album/documentary-music" target="_blank" rel="noopener noreferrer">
+                Documentary Music (2026)
               </a>
             </li>
             <li>
@@ -20,15 +20,17 @@ export default function ArtPage() {
               </a>
             </li>
             <li>
+              <a href="https://mapledeathrecords.bandcamp.com/album/lp2" target="_blank" rel="noopener noreferrer">
+                LP2 (2021)
+              </a>
+            </li>
+         
+            <li>
               <a href="https://mapledeathrecords.bandcamp.com/album/moods" target="_blank" rel="noopener noreferrer">
                 Moods (2020)
               </a>
             </li>
-            <li>
-              <a href="https://stellamathioudakis.bandcamp.com/album/documentary-music" target="_blank" rel="noopener noreferrer">
-                Documentary Music (2026)
-              </a>
-            </li>
+            <br />
             <li>Music Sync Clients include Nanushka, Zara, WEB SERIES SKMY. </li>
           </ul>
         </div>
